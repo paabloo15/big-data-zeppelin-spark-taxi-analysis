@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Spark / PySpark
+spark-warehouse/
+metastore_db/
+derby.log
+*.crc
+
+# Zeppelin
+zeppelin-data/
+.zeppelin/
+notebook/
+logs/
+
+# Data files (large)
+data/raw/*.parquet
+data/raw/*.csv
+data/processed/*.parquet
+data/processed/*.csv
+data/lookup/*.parquet
+
+# Keep directory placeholders
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/lookup/.gitkeep
+
+# Generated results
+results/*.csv
+results/*.json
+results/*.parquet
+!results/.gitkeep
+
+# Figures generated during analysis
+figures/*
+!figures/.gitkeep
+
+# Notebook checkpoints / temp
+.ipynb_checkpoints/
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# Docker / compose overrides
+.env
+.env.*
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini

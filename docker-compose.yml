@@ -1,0 +1,37 @@
+services:
+  zeppelin:
+    image: apache/zeppelin:0.11.2
+    container_name: zeppelin-spark-local
+    restart: unless-stopped
+
+    # Exponer Zeppelin y Spark UI local para inspeccion de jobs.
+    ports:
+      - "8080:8080"
+      - "4040:4040"
+
+    environment:
+      # Zeppelin escucha en todas las interfaces dentro del contenedor.
+      ZEPPELIN_ADDR: 0.0.0.0
+      ZEPPELIN_PORT: 8080
+
+      # Spark en modo local para escenario docente.
+      SPARK_MASTER: local[*]
+      PYSPARK_PYTHON: python3
+
+      # Persistencia de notebooks de Zeppelin.
+      ZEPPELIN_NOTEBOOK_DIR: /zeppelin/notebook
+
+    # Se montan datos, scripts y resultados para trabajo reproducible.
+    volumes:
+      - ./data:/opt/project/data
+      - ./scripts:/opt/project/scripts
+      - ./notebooks:/opt/project/notebooks
+      - ./results:/opt/project/results
+      - zeppelin_notebooks:/zeppelin/notebook
+      - zeppelin_logs:/zeppelin/logs
+
+    working_dir: /opt/project
+
+volumes:
+  zeppelin_notebooks:
+  zeppelin_logs:
