@@ -1,0 +1,125 @@
+\chapter{Análisis del problema}\label{cap:analisis}
+
+\section{Introducción}
+En este capítulo se formaliza el problema desde la perspectiva de ingeniería de
+datos: qué información se necesita, qué funcionalidades debe cumplir el sistema,
+y qué restricciones garantizan que los resultados sean técnicamente defendibles.
+
+El objetivo no es construir un producto comercial, sino una solución académica
+completa, reproducible y trazable, capaz de convertir datos masivos de viajes en
+evidencia analítica útil.
+
+\section{Preguntas de análisis que guían el proyecto}
+El sistema se diseñó para responder, al menos, las siguientes preguntas:
+\begin{itemize}
+	\item ¿Cómo se distribuye la demanda de viajes por franja horaria y día de semana?
+	\item ¿Qué zonas concentran mayor volumen de recogidas y destinos?
+	\item ¿Qué diferencias económicas aparecen por zona (tarifa, propina, ingreso)?
+	\item ¿Existe un desequilibrio territorial entre recogidas y destinos por distrito?
+	\item ¿Cómo difiere el comportamiento de viajes estándar frente a viajes de aeropuerto?
+\end{itemize}
+
+Estas preguntas se reflejan directamente en los notebooks de Zeppelin, que actúan
+como pieza de síntesis del trabajo.
+
+\section{Requisitos de información}
+Los datos base proceden del repositorio público de NYC TLC
+(\textit{Yellow Taxi Trip Records}) \cite{nyctlc,nyctlcparquet}. La fuente principal
+se consume en formato Parquet por su adecuación a cargas analíticas
+\cite{parquetdocs}.
+
+Campos mínimos utilizados:
+\begin{itemize}
+	\item \texttt{tpep\_pickup\_datetime}, \texttt{tpep\_dropoff\_datetime};
+	\item \texttt{passenger\_count}, \texttt{trip\_distance};
+	\item \texttt{PULocationID}, \texttt{DOLocationID};
+	\item \texttt{payment\_type}, \texttt{fare\_amount}, \texttt{tip\_amount},
+	\texttt{total\_amount};
+	\item \texttt{VendorID}, \texttt{RatecodeID}, \texttt{store\_and\_fwd\_flag}.
+\end{itemize}
+
+Datos geográficos auxiliares:
+\begin{itemize}
+	\item Shapefile de zonas TLC, convertido a GeoJSON para enriquecer y visualizar
+	por \texttt{LocationID}.
+\end{itemize}
+
+\section{Requisitos funcionales}
+\textbf{RF-01. Carga de datos Parquet.} El sistema debe cargar el fichero
+\texttt{yellow\_tripdata\_2025-01.parquet} en Spark y validar su esquema.
+
+\textbf{RF-02. Procesamiento distribuido.} El sistema debe cargar y transformar los
+datos con Apache Spark en modo distribuido local.
+
+\textbf{RF-03. Limpieza trazable.} El sistema debe aplicar reglas explícitas sobre
+nulos, duración, distancia, importes, pasajeros y coherencia temporal.
+
+\textbf{RF-04. Variables derivadas.} El sistema debe generar variables para análisis
+temporal (fecha, hora, día, franja horaria) y operativo (duración, velocidad).
+
+\textbf{RF-05. Traducción de códigos.} El sistema debe convertir codificación numérica
+(vendor, pago, tarifa, flag) a etiquetas legibles de negocio.
+
+\textbf{RF-06. Integración geográfica.} El sistema debe enriquecer el dataset por
+zonas de origen y destino usando el GeoJSON de zonas TLC.
+
+\textbf{RF-07. Consultas analíticas.} El sistema debe ejecutar consultas por hora,
+franja, tipo de viaje, pasajeros, distrito y balance territorial.
+
+\textbf{RF-08. Exportación de indicadores por zona.} El sistema debe generar CSVs de
+indicadores (viajes, tarifa, propina, distancia, duración, ingresos, hora pico/valle)
+por zona de origen y de destino.
+
+\textbf{RF-09. Visualización geográfica.} El sistema debe generar mapas coropléticos
+interactivos con Folium, con inspección por tooltip.
+
+\textbf{RF-10. Trazabilidad de ejecución.} El sistema debe ofrecer salidas verificables
+en los notebooks y archivos de indicadores para su revisión posterior.
+
+\section{Requisitos no funcionales}
+\textbf{RNF-01. Reproducibilidad.} La ejecución debe replicarse entre equipos mediante
+Docker Compose.
+
+\textbf{RNF-02. Claridad técnica.} Notebooks y documentación deben ser
+comprensibles para revisión académica.
+
+\textbf{RNF-03. Trazabilidad.} Cada fase del flujo debe dejar evidencias de salida
+(recuento de limpieza, indicadores exportados y visualizaciones generadas).
+
+\textbf{RNF-04. Escalabilidad conceptual.} La solución local debe permitir justificar
+una migración futura a clúster real.
+
+\textbf{RNF-05. Honestidad de resultados.} No se deben reportar métricas inventadas;
+la discusión debe apoyarse en ejecuciones observables.
+
+\textbf{RNF-06. Mantenibilidad.} El repositorio debe separar datos, notebooks y
+documentación para facilitar evolución.
+
+\section{Restricciones y supuestos}
+\begin{itemize}
+	\item El entorno de ejecución es local; por tanto, memoria y CPU son limitadas.
+	\item El análisis se centra en un mes de referencia (enero de 2025) para
+	mantener tiempos de procesamiento razonables.
+	\item La calidad del dato depende de la fuente pública; el sistema no corrige
+	errores semánticos externos no detectables por reglas objetivas.
+	\item El GeoJSON de zonas se genera mediante un script auxiliar
+	(\texttt{convert.py}) a partir del shapefile oficial de TLC.
+\end{itemize}
+
+\section{Criterios de aceptación}
+Se consideran cumplidos los requisitos cuando:
+\begin{itemize}
+	\item el notebook principal ejecuta sus bloques de carga, limpieza y análisis
+	sin errores;
+	\item se obtienen los 14 ficheros CSV de indicadores por zona (7 de origen y
+	7 de destino);
+	\item el notebook de mapas genera visualizaciones coropléticas navegables;
+	\item se documenta el flujo completo con evidencias de ejecución.
+\end{itemize}
+
+\section{Conclusiones}
+El análisis confirma que el problema es abordable con un flujo de analítica
+distribuida en Spark siempre que se mantengan tres principios: limpieza trazable,
+reproducibilidad operativa y transparencia en la interpretación de resultados.
+Con estos requisitos, los notebooks de Zeppelin se convierten en evidencia
+integrada de implementación y análisis.

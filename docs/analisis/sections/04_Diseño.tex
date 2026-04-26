@@ -1,0 +1,148 @@
+\chapter{Diseño de la solución}\label{cap:diseno}
+
+\section{Introducción}
+El diseño persigue un equilibrio explícito entre tres objetivos: capacidad analítica,
+reproducibilidad local y claridad para defensa académica. En lugar de una arquitectura
+sobredimensionada, se adopta un diseño modular con separación entre datos, notebooks y
+documentación, lo que permite ampliar componentes sin rehacer el núcleo del flujo
+analítico.
+
+\section{Arquitectura de alto nivel}
+La solución se organiza en cuatro capas:
+
+\begin{itemize}
+	\item \textbf{Capa de ejecución}: contenedores \texttt{zeppelin},
+	\texttt{spark-master} y \texttt{spark-worker-1} en Docker Compose.
+	\item \textbf{Capa de datos}: directorio \texttt{data/} con el Parquet de
+	entrada, CSVs de indicadores exportados, shapefile y GeoJSON de zonas.
+	\item \textbf{Capa de procesamiento}: notebooks de Zeppelin con PySpark y
+	Spark SQL para carga, limpieza, análisis y exportación.
+	\item \textbf{Capa de visualización}: gráficas nativas de Zeppelin para
+	análisis tabular y mapas coropléticos con Folium para análisis geográfico.
+\end{itemize}
+
+El uso de Spark en modo distribuido local permite conservar la semántica de un
+procesamiento escalable, aun ejecutando en infraestructura docente.
+
+\section{Diseño de almacenamiento y rutas}
+El diseño físico de datos responde a un flujo directo:
+
+\begin{itemize}
+	\item \texttt{data/yellow\_tripdata\_2025-01.parquet}: fichero de entrada
+	con los registros Yellow Taxi de enero de 2025.
+	\item \texttt{data/taxi\_zones.*}: shapefile oficial de zonas TLC (5 ficheros).
+	\item \texttt{data/nyc\_taxi\_zones.geojson}: GeoJSON generado a partir del
+	shapefile mediante el script auxiliar \texttt{convert.py}.
+	\item \texttt{data/*.csv}: indicadores por zona exportados desde Spark
+	(14 ficheros: viajes, tarifa, propina, distancia, duración, ingresos y horas
+	pico/valle, cada uno por origen y por destino).
+\end{itemize}
+
+Esta estructura plana es intencionada: todos los datos residen en un único directorio
+montado como volumen Docker (\texttt{/data}), accesible tanto desde Spark como desde
+Python.
+
+\section{Diseño del flujo analítico}
+El flujo se implementa íntegramente en dos notebooks de Zeppelin, sin scripts
+externos de ETL:
+
+\begin{enumerate}
+	\item \textbf{Notebook principal}
+	(\texttt{Análisis Taxis Nueva York.zpln}): concentra la carga del Parquet,
+	la limpieza, el enriquecimiento y todas las consultas analíticas. Está
+	organizado en bloques secuenciales que procesan los datos paso a paso.
+	\item \textbf{Notebook de mapas}
+	(\texttt{Análisis Taxis Nueva York Mapas.zpln}): lee los CSVs de indicadores
+	exportados por el notebook principal y genera mapas coropléticos interactivos
+	con Folium.
+\end{enumerate}
+
+Se incluye además una versión del notebook de mapas ya ejecutada
+(\texttt{Análisis Taxis Nueva York Mapas (Ejecutados).zpln}), que permite revisar
+las visualizaciones sin necesidad de volver a ejecutar el código.
+
+En la fase de procesamiento se definen métricas derivadas clave:
+
+\[
+\text{trip\_duration\_minutes} =
+\frac{\text{unix}(\texttt{dropoff}) - \text{unix}(\texttt{pickup})}{60}
+\]
+
+\[
+\text{average\_speed\_mph} =
+\frac{\texttt{trip\_distance}}{\text{trip\_duration\_minutes} / 60}
+\]
+
+Y se aplican restricciones de limpieza para eliminar registros no plausibles
+(duraciones no positivas, velocidades extremas, importes negativos y nulos críticos).
+
+\section{Diseño del notebook principal}
+El notebook principal se diseña como un flujo integrado con párrafos Spark y
+Spark SQL:
+
+\begin{enumerate}
+	\item Carga del Parquet de referencia y validación básica de esquema.
+	\item Limpieza avanzada con filtros de dominio (rango de
+	\texttt{LocationID}, pasajeros mínimos y coherencia temporal).
+	\item Enriquecimiento geográfico mediante GeoJSON de zonas TLC.
+	\item Traducción de códigos a etiquetas legibles (vendor, pago, tarifa, flag).
+	\item Ejecución de consultas analíticas por hora, franja, tipo de viaje,
+	pasajeros y balance entre recogidas y destinos.
+	\item Exportación de indicadores agregados por zona a CSV.
+	\item Generación de visualizaciones comparativas directamente en Zeppelin.
+\end{enumerate}
+
+Este diseño permite que el notebook sea simultáneamente entorno de análisis,
+artefacto de demostración y evidencia de ejecución del proyecto.
+
+\section{Diseño de consultas e indicadores}
+Los indicadores extraídos se agrupan en cuatro vistas principales:
+
+\begin{itemize}
+\item \textbf{Comportamiento temporal}: viajes por hora, tarifa media y duración
+media, además de comparativa de 1 de enero frente al resto del mes.
+\item \textbf{Comparativas operativas}: diferencia entre viajes estándar y viajes
+de aeropuerto en volumen, distancia, duración, tarifa y propina.
+\item \textbf{Patrones geográficos}: métricas agregadas por distrito de recogida
+(distancia, velocidad y coste por milla).
+\item \textbf{Balance territorial}: contraste recogidas vs destinos por distrito
+y su diferencia neta.
+\end{itemize}
+
+Los indicadores por zona se exportan a CSV con la siguiente estructura:
+\begin{itemize}
+\item \textbf{Por zona de origen (pickup)}: viajes, tarifa media, propina media,
+distancia media, duración media, ingresos totales y hora pico/valle.
+\item \textbf{Por zona de destino (dropoff)}: los mismos indicadores agregados por
+\texttt{DOLocationID}.
+\end{itemize}
+
+Estos CSVs alimentan directamente el notebook de mapas, cerrando el ciclo
+análisis-visualización.
+
+\section{Decisiones de diseño y trade-offs}
+Las decisiones más relevantes fueron:
+
+\begin{itemize}
+	\item \textbf{Parquet como fuente principal}: mejora de I/O y lectura selectiva
+	por columnas, adecuado para cargas analíticas con Spark.
+	\item \textbf{CSV como formato de exportación}: los indicadores por zona se
+	exportan a CSV para su consumo por Folium/Pandas, que requiere formatos
+	tabulares simples. No se usa CSV como formato de almacenamiento analítico.
+	\item \textbf{Zeppelin como interfaz única}: facilita defensa al unir código,
+	salida, gráficas y explicación en el mismo documento.
+	\item \textbf{Dos notebooks separados}: el análisis principal se mantiene
+	independiente de la visualización geográfica, permitiendo ejecutar uno sin
+	el otro y reduciendo el acoplamiento.
+	\item \textbf{Consultas SQL centradas en interpretación}: se priorizan métricas
+	que aportan lectura de movilidad real frente a tablas excesivamente técnicas.
+\end{itemize}
+
+Como trade-off, se renuncia a complejidad de producción (autoscaling,
+alta disponibilidad y orquestación externa) para mantener foco académico.
+
+\section{Conclusiones}
+El diseño implementado es coherente con el alcance del proyecto de asignatura y con
+la naturaleza del dataset. La separación en dos notebooks, junto con la exportación
+de indicadores por zona, proporciona una base sólida para análisis reproducible hoy y
+para evolución a despliegues más escalables en el futuro.

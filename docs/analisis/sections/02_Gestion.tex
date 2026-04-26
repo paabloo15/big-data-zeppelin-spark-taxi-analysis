@@ -1,0 +1,126 @@
+\chapter{Estudio previo y gestión del trabajo}\label{cap:gestion}
+
+\section{Introducción}
+Este capítulo describe cómo se planificó y gobernó el trabajo para llegar a un
+resultado técnico completo sin perder trazabilidad. La gestión se orientó a un
+objetivo claro: construir una solución reproducible en entorno local, con notebooks
+versionados, decisiones justificadas y una narrativa defendible en presentación.
+
+\section{Contexto tecnológico de partida}
+La selección tecnológica se apoyó en herramientas abiertas y ampliamente adoptadas
+en analítica de datos:
+\begin{itemize}
+	\item Apache Spark para procesamiento distribuido y consultas analíticas.
+	\item Apache Zeppelin para desarrollo exploratorio, análisis y visualización.
+	\item Docker Compose para estandarizar el entorno entre miembros del equipo.
+	\item Python/PySpark para enriquecimiento geográfico y generación de mapas
+	con Folium.
+\end{itemize}
+
+La elección de Parquet como formato de entrada permitió mantener coherencia entre
+eficiencia de almacenamiento y rendimiento de lectura en consultas analíticas.
+Los indicadores por zona se exportan a CSV para su consumo en visualizaciones
+geográficas.
+
+\section{Metodología de trabajo}
+Se aplicó un enfoque incremental con entregables verificables en cada iteración.
+Cada bloque cerraba con una revisión técnica de tres aspectos: viabilidad,
+reproducibilidad y claridad documental.
+
+\begin{enumerate}
+	\item \textbf{Iteración 1 - Base de ejecución}: estructura de repositorio,
+	dockerización y arranque de servicios.
+	\item \textbf{Iteración 2 - Carga y limpieza}: notebook principal con carga
+	de Parquet, reglas de calidad y enriquecimiento.
+	\item \textbf{Iteración 3 - Análisis}: consultas temporales, geográficas y
+	económicas en el notebook principal.
+	\item \textbf{Iteración 4 - Visualización geográfica}: exportación de CSVs
+	por zona y notebook de mapas con Folium.
+	\item \textbf{Iteración 5 - Cierre académico}: pruebas, documentación y
+	conclusiones.
+\end{enumerate}
+
+Este enfoque permitió controlar el alcance y detectar pronto bloqueos técnicos,
+evitando una integración tardía de componentes.
+
+\section{Planificación funcional}
+La planificación final se alineó con los dos notebooks de Zeppelin y los
+artefactos de datos:
+
+\begin{table}[H]
+	\centering
+	\caption{Planificación por bloques funcionales}
+	\begin{tabular}{|p{2.3cm}|p{4.7cm}|p{6.4cm}|}
+		\hline
+		\textbf{Bloque} & \textbf{Objetivo} & \textbf{Entregable principal} \\
+		\hline
+		B1 & Ingesta y validación & Carga de Parquet y validación de esquema \\
+		\hline
+		B2 & Calidad del dato & Reglas de limpieza + dataset limpio en memoria \\
+		\hline
+		B3 & Análisis temporal & Consultas por hora, día y franja horaria \\
+		\hline
+		B4 & Análisis geográfico-económico & Join con GeoJSON + indicadores por zona \\
+		\hline
+		B5 & Exportación de indicadores & CSVs por zona de origen y destino \\
+		\hline
+		B6 & Mapas interactivos & Notebook de mapas coropléticos con Folium \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Gestión de riesgos}
+Durante el trabajo se identificaron riesgos recurrentes en proyectos Big Data
+académicos y se definieron respuestas preventivas.
+
+\begin{table}[H]
+	\centering
+	\caption{Riesgos relevantes y medidas de mitigación}
+	\begin{tabular}{|p{4.0cm}|p{3.2cm}|p{6.2cm}|}
+		\hline
+		\textbf{Riesgo} & \textbf{Impacto} & \textbf{Mitigación aplicada} \\
+		\hline
+		Memoria insuficiente en local & Alto & Análisis centrado en un mes (enero 2025) y ajuste de parámetros Spark \\
+		\hline
+		Inconsistencia entre entornos del equipo & Alto & Uso de Docker Compose y comandos estandarizados \\
+		\hline
+		Resultados difíciles de defender & Medio & Reglas de limpieza explícitas y trazabilidad de salidas \\
+		\hline
+		Dependencia de datos auxiliares geográficos & Medio & Generación de GeoJSON desde shapefile con script auxiliar \\
+		\hline
+		Sobrecarga documental al final & Medio & Redacción continua por iteraciones y cierre por capítulo \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Recursos y estimación de esfuerzo}
+El proyecto se desarrolló en contexto docente, por lo que no se imputan licencias
+de software. La estimación económica se centra en esfuerzo de equipo y coste operativo
+del entorno local.
+
+\begin{table}[H]
+	\centering
+	\caption{Estimación orientativa de esfuerzo y coste}
+	\begin{tabular}{|p{6.8cm}|c|c|}
+		\hline
+		\textbf{Concepto} & \textbf{Cantidad} & \textbf{Coste estimado (EUR)} \\
+		\hline
+		Esfuerzo técnico del equipo (análisis, código y documentación) & 120 h & 0 \\
+		\hline
+		Software y licencias (Spark, Zeppelin, Python, Docker) & -- & 0 \\
+		\hline
+		Infraestructura cloud & -- & 0 \\
+		\hline
+		Consumo eléctrico y uso de equipos locales & -- & 20 \\
+		\hline
+		\textbf{Total estimado} & -- & \textbf{20} \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Conclusiones}
+La gestión del trabajo permitió mantener equilibrio entre ambición técnica y alcance
+realista. El resultado no es un prototipo aislado, sino una solución completa con
+notebooks de análisis y mapas, exportación de indicadores y documentación coherente,
+preparada para presentación académica y para evolución futura a entornos de mayor
+escala.

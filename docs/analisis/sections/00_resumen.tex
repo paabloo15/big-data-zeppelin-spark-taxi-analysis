@@ -1,0 +1,29 @@
+\chapter*{Resumen}
+Este proyecto de la asignatura Complementos de Bases de Datos desarrolla una solución
+de analítica de datos masivos para movilidad urbana utilizando el conjunto de viajes de
+taxi de Nueva York (\textit{NYC Taxi \& Limousine Commission}, Yellow Taxi).
+La implementación integra Apache Spark como motor de procesamiento distribuido,
+Apache Zeppelin como entorno de análisis interactivo y Python/PySpark para
+enriquecimiento geográfico y visualización con mapas.
+
+La aportación central es un flujo completo y reproducible: carga de ficheros Parquet,
+limpieza trazable con reglas explícitas, enriquecimiento temporal y geográfico, y
+ejecución de consultas analíticas en dos notebooks de Zeppelin. El primero,
+\texttt{Análisis Taxis Nueva York.zpln}, concentra la carga, el preprocesamiento y
+todos los análisis tabulares y gráficos. El segundo,
+\texttt{Análisis Taxis Nueva York Mapas.zpln}, consume los indicadores exportados
+por zona y genera mapas coropléticos interactivos con Folium.
+
+Entre los hallazgos principales, el análisis muestra picos de actividad en franjas de
+tarde-noche, un volumen claramente dominante de viajes estándar frente a viajes a
+aeropuerto, y contrastes muy marcados entre distritos en velocidad media, tarifa y
+equilibrio de flujos de movilidad.
+
+Como limitaciones, el despliegue se realiza en infraestructura local y no en clúster
+productivo. Aun así, la arquitectura deja preparada la migración a entornos más
+escalables (Spark Standalone, YARN o Kubernetes) sin rehacer la lógica analítica.
+
+\vspace{.5cm}
+
+\textbf{Palabras clave:} Big Data, Apache Spark, Apache Zeppelin, PySpark, Parquet,
+movilidad urbana, Spark SQL, analítica urbana, calidad del dato, Folium.

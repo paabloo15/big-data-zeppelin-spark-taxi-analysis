@@ -1,0 +1,88 @@
+\chapter{Introducción}\label{cap:introduccion}
+
+\section{Contexto y motivación}
+La movilidad urbana genera volúmenes de datos que exceden las capacidades de
+procesamiento tradicional. En este escenario, Apache Spark se ha consolidado como una
+tecnología de referencia para analítica distribuida por su modelo de ejecución y su
+optimización de consultas \cite{zaharia2012resilient,armbrust2015sparksql,sparkdocs}.
+Para la exploración interactiva y la comunicación de resultados, Apache Zeppelin aporta
+un formato notebook que integra código, consultas y visualizaciones en un único flujo
+de trabajo \cite{zeppelindocs}.
+
+El presente trabajo aplica este stack al conjunto de datos público de la
+\textit{New York City Taxi and Limousine Commission} (NYC TLC), centrado en registros
+Yellow Taxi en formato Parquet \cite{nyctlc,nyctlcparquet,parquetdocs}. El interés no
+es únicamente técnico: se busca demostrar cómo convertir datos masivos de viajes en
+evidencia analítica clara para apoyar decisiones sobre patrones de demanda, coste y
+comportamiento temporal de la movilidad.
+
+Además, se adopta una arquitectura reproducible en entorno local con Docker, de forma
+que cualquier miembro del equipo pueda replicar la ejecución y validar resultados sin
+dependencias manuales difíciles de mantener \cite{dockerdocs}.
+
+\section{Objetivos}
+\subsection{Objetivo general}
+Diseñar e implementar un sistema analítico Big Data reproducible y defendible,
+capaz de procesar, limpiar, enriquecer, consultar y visualizar datos masivos de
+viajes de taxi en Nueva York, culminando en notebooks de Zeppelin que
+concentran todo el análisis técnico y las visualizaciones geográficas.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+	\item Cargar y validar ficheros Yellow Taxi en formato Parquet dentro del
+	entorno Spark.
+	\item Definir y aplicar reglas trazables de calidad del dato directamente
+	en los notebooks de Zeppelin.
+	\item Generar variables derivadas para análisis temporal, geográfico y económico.
+	\item Integrar Spark SQL y DataFrames para consultas analíticas reproducibles.
+	\item Enriquecer geográficamente los datos mediante GeoJSON de zonas TLC.
+	\item Exportar indicadores por zona a CSV para alimentar mapas coropléticos.
+	\item Construir visualizaciones geográficas interactivas con Folium.
+\end{itemize}
+
+\section{Alcance}
+El alcance funcional del proyecto incluye:
+\begin{itemize}
+	\item Ejecución local con Docker Compose y servicios Spark + Zeppelin.
+	\item Carga, limpieza y enriquecimiento de datos Yellow Taxi (enero 2025).
+	\item Análisis temporal y geográfico-económico en notebooks interactivos.
+	\item Exportación de indicadores por zona para mapas coropléticos con Folium.
+	\item Generación de mapas interactivos que permitan inspección por zona.
+\end{itemize}
+
+Quedan fuera del alcance:
+\begin{itemize}
+	\item Despliegue productivo en clúster empresarial multiusuario.
+	\item Orquestación avanzada (por ejemplo, Airflow) y monitorización completa.
+	\item Validación con datos de múltiples años de forma exhaustiva en infraestructura
+	de alta disponibilidad.
+\end{itemize}
+
+Este recorte de alcance es intencional y coherente con el contexto docente: prioriza
+calidad técnica, trazabilidad y capacidad de defensa frente a complejidad operativa.
+
+\section{Contribuciones del trabajo}
+Las contribuciones principales son las siguientes:
+\begin{itemize}
+	\item \textbf{Flujo analítico integrado en Zeppelin}: dos notebooks que cubren
+	desde la carga hasta la visualización geográfica, sin scripts externos.
+	\item \textbf{Criterios de calidad explícitos}: reglas concretas para filtrar registros
+	inconsistentes y justificar su impacto.
+	\item \textbf{Enriquecimiento geográfico completo}: uso de GeoJSON y Folium para
+	representar indicadores por zona TLC con mapas coropléticos interactivos
+	\cite{foliumdocs,geojsonspec}.
+	\item \textbf{Exportación de indicadores por zona}: generación de CSVs de métricas
+	agregadas por origen y destino para alimentar visualizaciones externas.
+	\item \textbf{Narrativa defendible}: documentación técnica que conecta decisiones,
+	implementación y resultados sin introducir métricas inventadas.
+\end{itemize}
+
+\section{Estructura del documento}
+El documento se organiza en siete capítulos principales. Tras esta introducción,
+el Capítulo 2 describe el estudio previo y la gestión del trabajo. El Capítulo 3
+formaliza los requisitos y el análisis del problema. El Capítulo 4 presenta el
+diseño de la arquitectura y del flujo analítico. El Capítulo 5 detalla la implementación
+real del repositorio y los notebooks de Zeppelin. El Capítulo 6 recoge
+las pruebas de validación funcional y técnica. Por último, el capítulo de
+conclusiones resume logros, limitaciones y líneas de trabajo futuro.
+

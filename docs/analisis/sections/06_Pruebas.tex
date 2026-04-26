@@ -1,0 +1,137 @@
+\chapter{Pruebas}\label{cap:pruebas}
+
+\section{Introducción}
+El objetivo de este capítulo es documentar cómo se validó la solución de forma
+pragmática en entorno local. Las pruebas cubren el flujo completo: ingesta,
+limpieza, enriquecimiento, exportación de indicadores y visualización final en
+los notebooks de Zeppelin.
+
+\section{Estrategia de validación}
+Se aplicaron tres tipos de verificación:
+
+\begin{itemize}
+	\item \textbf{Pruebas funcionales de flujo}: comprobar que cada etapa produce la
+	salida esperada y habilita la siguiente.
+	\item \textbf{Pruebas de consistencia de datos}: verificar reglas de limpieza y
+	coherencia temporal/numérica tras los filtros.
+	\item \textbf{Pruebas de presentación analítica}: confirmar que los notebooks
+	ejecutan correctamente y generan gráficas, indicadores y mapas interpretables.
+\end{itemize}
+
+\section{Pruebas funcionales del notebook principal}
+El notebook \texttt{Análisis Taxis Nueva York.zpln} se utilizó como prueba
+integrada de extremo a extremo. Los párrafos principales registrados aparecen
+con estado \texttt{FINISHED} y código de ejecución \texttt{SUCCESS}.
+
+\begin{table}[H]
+	\centering
+	\caption{Pruebas funcionales sobre el notebook principal}
+	\begin{tabular}{|p{1.7cm}|p{6.1cm}|p{4.1cm}|p{2.4cm}|}
+		\hline
+		\textbf{ID} & \textbf{Caso de prueba} & \textbf{Evidencia esperada} & \textbf{Resultado} \\
+		\hline
+		PF-01 & Carga de Parquet y revisión de esquema & Conteo de registros y muestra de filas & Superada \\
+		\hline
+		PF-02 & Limpieza de registros con reglas de dominio & Dataset limpio cacheado y recuento final & Superada \\
+		\hline
+		PF-03 & Join geográfico con GeoJSON & Columnas de zona origen/destino en dataset final & Superada \\
+		\hline
+		PF-04 & Consulta horaria de viajes/tarifa/duración & Tabla de 24 horas generada en Zeppelin & Superada \\
+		\hline
+		PF-05 & Comparativas por tipo de viaje y pasajeros & Tablas agregadas sin errores de ejecución & Superada \\
+		\hline
+		PF-06 & Balance recogida-destino por distrito & Tabla de diferencias por borough generada & Superada \\
+		\hline
+		PF-07 & Exportación de CSVs de indicadores por zona & 14 ficheros CSV generados en \texttt{/data} & Superada \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Pruebas funcionales del notebook de mapas}
+El notebook \texttt{Análisis Taxis Nueva York Mapas.zpln} se validó tras la
+ejecución del notebook principal, que genera los CSVs de indicadores necesarios.
+
+\begin{table}[H]
+	\centering
+	\caption{Pruebas funcionales sobre el notebook de mapas}
+	\begin{tabular}{|p{1.7cm}|p{6.1cm}|p{4.1cm}|p{2.4cm}|}
+		\hline
+		\textbf{ID} & \textbf{Caso de prueba} & \textbf{Evidencia esperada} & \textbf{Resultado} \\
+		\hline
+		PM-01 & Lectura de CSVs de indicadores & DataFrames cargados sin errores & Superada \\
+		\hline
+		PM-02 & Carga del GeoJSON de zonas & GeoDataFrame con geometrías válidas & Superada \\
+		\hline
+		PM-03 & Generación de mapas coropléticos & Mapas Folium renderizados con tooltips & Superada \\
+		\hline
+		PM-04 & Inspección interactiva por zona & Tooltip con nombre de zona e indicador al pasar el ratón & Superada \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Validación de resultados analíticos}
+Además de validar ejecución, se comprobó que los resultados clave del notebook son
+coherentes entre sí y con la lógica de negocio.
+
+\begin{itemize}
+\item En la serie horaria, el mínimo de viajes aparece a las 04:00 (12{,}175) y el
+máximo a las 17:00 (205{,}245), patrón consistente con movilidad urbana real.
+\item La comparación 1 de enero vs resto del mes confirma un comportamiento anómalo
+de madrugada en el festivo, sin romper coherencia en el resto de franjas.
+\item La tipología de viaje refleja dominio de viajes estándar
+(2{,}696{,}555) frente a aeropuerto (94{,}614), con mayor distancia y tarifa en este
+último caso.
+\item El balance territorial (recogidas - destinos) identifica a Queens como emisor
+neto (+119{,}591) y a Brooklyn como receptor neto (-81{,}809), en línea con una
+dinámica centro-periferia esperable.
+\item Los 14 CSVs exportados contienen datos coherentes con las consultas del notebook
+y sirven como entrada verificable para los mapas.
+\end{itemize}
+
+\section{Pruebas sobre reglas de calidad del dato}
+Se verificó que las reglas implementadas en Spark son coherentes con el dominio
+del problema y se aplican de forma explícita. En particular:
+
+\begin{itemize}
+	\item no se admiten fechas de recogida o entrega nulas;
+	\item la duración del viaje debe ser positiva;
+	\item distancia e importes deben ser positivos;
+	\item el orden temporal \texttt{dropoff > pickup} es obligatorio;
+	\item la velocidad media debe estar dentro de umbrales plausibles;
+	\item \texttt{PULocationID} y \texttt{DOLocationID} deben estar en rango
+	válido (1..263).
+\end{itemize}
+
+Como resultado, el flujo elimina registros inconsistentes antes de calcular
+indicadores, reduciendo el riesgo de conclusiones erróneas.
+
+\section{Pruebas de coherencia entre notebooks}
+Se verificó que la cadena de dependencia entre notebooks funciona correctamente:
+
+\begin{itemize}
+	\item El notebook principal genera los 14 CSVs en \texttt{/data}.
+	\item El notebook de mapas los lee y genera visualizaciones sin errores.
+	\item Los valores mostrados en los tooltips de los mapas son consistentes
+	con las tablas del notebook principal.
+	\item La versión ejecutada del notebook de mapas mantiene las salidas
+	correctas para revisión posterior.
+\end{itemize}
+
+\section{Limitaciones de las pruebas}
+Las validaciones realizadas son suficientes para el alcance docente, pero presentan
+limitaciones reconocidas:
+
+\begin{itemize}
+	\item no se ejecutó una batería sistemática de estrés en varios nodos físicos;
+	\item la variabilidad de hardware local puede afectar tiempos absolutos;
+	\item no se incluyó automatización CI/CD de pruebas de regresión completas.
+\end{itemize}
+
+Estas limitaciones no invalidan los hallazgos, pero delimitan su interpretación.
+
+\section{Conclusiones}
+Las pruebas confirman que la solución funciona de extremo a extremo: ambos notebooks
+ejecutan correctamente sus bloques principales, las reglas de limpieza son coherentes,
+los CSVs exportados alimentan correctamente los mapas, y las salidas generadas permiten
+justificar resultados analíticos de manera trazable. Con ello, la implementación queda
+validada para su defensa académica.

@@ -1,0 +1,23 @@
+\chapter*{Abstract}
+This report presents a scalable urban mobility analytics workflow based on the
+New York City Yellow Taxi dataset. The solution combines Apache Spark for distributed
+processing, Apache Zeppelin for interactive notebooks, and Python/PySpark for
+geographic enrichment and map-based visualization.
+
+The implemented pipeline covers end-to-end data handling: Parquet ingestion,
+traceable cleaning rules, feature enrichment, and analytical queries with DataFrames
+and Spark SQL. Two Zeppelin notebooks organize the work: the first one
+(\texttt{Análisis Taxis Nueva York.zpln}) performs loading, cleaning and all
+tabular and visual analyses; the second one
+(\texttt{Análisis Taxis Nueva York Mapas.zpln}) reads exported zone-level indicators
+and generates interactive choropleth maps using Folium.
+
+The resulting system is reproducible in a local Docker-based environment and suitable
+for academic presentation. Although it is not a production cluster deployment, the
+architecture and code are designed to support future migration to larger Spark
+infrastructures without rewriting the analytical logic.
+
+\vspace{.5cm}
+
+\textbf{Keywords:} Big Data, Apache Spark, Apache Zeppelin, PySpark, Parquet,
+urban mobility, Spark SQL, data quality, Folium, exploratory analytics.

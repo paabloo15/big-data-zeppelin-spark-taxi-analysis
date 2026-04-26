@@ -1,0 +1,67 @@
+\chapter{Conclusiones}\label{cap:conclusiones}
+
+\section{Síntesis del trabajo realizado}
+Este proyecto ha desarrollado una solución analítica completa para estudiar movilidad
+urbana con datos masivos de taxis de Nueva York, combinando Spark, Zeppelin y
+Python/PySpark en un entorno local reproducible. El resultado no se limita a un
+notebook aislado: se ha construido un flujo técnico coherente que integra ingesta
+de Parquet, calidad del dato, análisis tabular y gráfico, exportación de indicadores
+por zona y visualización geográfica con mapas interactivos.
+
+\section{Cumplimiento de objetivos}
+Los objetivos definidos en la introducción se consideran alcanzados:
+\begin{itemize}
+	\item se cargó y validó el dataset de enero 2025 en formato Parquet;
+	\item se implementó limpieza trazable con criterios explícitos y defendibles;
+	\item se generaron variables derivadas para análisis temporal y económico;
+	\item se ejecutaron consultas analíticas en Spark SQL y DataFrames;
+	\item se enriquecieron los datos geográficamente con GeoJSON de zonas TLC;
+	\item se exportaron 14 CSVs de indicadores por zona de origen y destino;
+	\item se construyeron dos notebooks de Zeppelin: uno con análisis completo
+	y otro con mapas coropléticos interactivos con Folium.
+\end{itemize}
+
+\section{Valor técnico y académico}
+El valor principal del trabajo reside en su equilibrio entre ingeniería y
+comunicación de resultados:
+\begin{itemize}
+	\item desde el punto de vista técnico, el flujo es reproducible con Docker y
+	fácilmente extensible a más meses o datasets;
+	\item desde el punto de vista académico, los notebooks permiten defender
+	decisiones de diseño con evidencia ejecutable;
+	\item desde el punto de vista metodológico, se mantuvo trazabilidad entre
+	requisitos, implementación y pruebas;
+	\item la separación en dos notebooks (análisis + mapas) facilita la
+	reutilización y la presentación modular del trabajo.
+\end{itemize}
+
+\section{Limitaciones}
+Se reconocen limitaciones inherentes al alcance elegido:
+\begin{itemize}
+	\item infraestructura local con recursos acotados;
+	\item ausencia de despliegue productivo con alta disponibilidad;
+	\item análisis limitado a un único mes (enero 2025), que puede no
+	reflejar patrones estacionales completos.
+\end{itemize}
+
+Estas limitaciones son compatibles con el objetivo del proyecto y no comprometen la
+validez de las conclusiones dentro del contexto definido.
+
+\section{Líneas de trabajo futuro}
+Como evolución natural del proyecto se proponen:
+\begin{itemize}
+	\item ampliar el periodo temporal analizado con más meses y temporadas completas;
+	\item desplegar el flujo en un clúster real (Standalone, YARN o Kubernetes);
+	\item incorporar orquestación de pipelines y pruebas automáticas de regresión;
+	\item añadir capas de análisis predictivo (por ejemplo, demanda por franja horaria);
+	\item construir un panel interactivo operativo para consumo no técnico;
+	\item incluir una comparativa de rendimiento formal entre Parquet y CSV con
+	infraestructura controlada.
+\end{itemize}
+
+\section{Cierre}
+La solución final demuestra que es posible construir, con herramientas abiertas y
+en un entorno docente, un sistema de analítica Big Data robusto y defendible.
+Los notebooks de Zeppelin actúan como artefactos de síntesis del proyecto y dejan
+una base sólida para continuar hacia escenarios de mayor escala y complejidad.
+
