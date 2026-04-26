@@ -2,7 +2,7 @@
 
 ## Opción rápida — Clonar el repositorio
 
-Si tienes acceso al repositorio Git del proyecto, puedes saltarte los pasos 2 y 3 de esta guía (estructura de carpetas y archivos de configuración) ya que el repositorio los incluye todos.
+Si clonas el repositorio Git del proyecto, puedes saltarte los pasos 2 y 3 de esta guía (estructura de carpetas y archivos de configuración) ya que el repositorio los incluye todos.
 
 ```powershell
 git clone https://github.com/paabloo15/big-data-zeppelin-spark-taxi-analysis.git
