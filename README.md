@@ -1,202 +1,298 @@
-# Analisis escalable de movilidad urbana con Apache Spark y Apache Zeppelin usando datos masivos de taxis de Nueva York
+# Guía de Instalación — Análisis Taxis NYC con Zeppelin + Spark + Docker
 
-## 1. Descripcion del proyecto
-Este repositorio contiene una base tecnica para un proyecto universitario de Big Data orientado al analisis historico de viajes de taxi en Nueva York (NYC TLC Trip Record Data, Yellow Taxi).
+## Opción rápida — Clonar el repositorio
 
-El objetivo no es generar una memoria final automatica, sino disponer de:
-- infraestructura local reproducible;
-- scripts claros para descarga, limpieza y analitica;
-- guiones de notebooks para Zeppelin;
-- documentacion tecnica defendible.
+Si tienes acceso al repositorio Git del proyecto, puedes saltarte los pasos 2 y 3 de esta guía (estructura de carpetas y archivos de configuración) ya que el repositorio los incluye todos.
 
-## 2. Objetivos
-### Objetivo general
-Construir un flujo Big Data local, escalable y defendible, basado en Spark y Zeppelin para procesar y analizar datos masivos de movilidad urbana.
+```powershell
+git clone https://github.com/paabloo15/big-data-zeppelin-spark-taxi-analysis.git
+cd big-data-zeppelin-spark-taxi-analysis
+```
 
-### Objetivos especificos
-- Descargar datos en formato Parquet desde la fuente oficial de NYC TLC.
-- Aplicar limpieza de datos con reglas explicitas y trazables.
-- Crear columnas derivadas utiles para analisis temporal y economico.
-- Ejecutar consultas analiticas con DataFrames y Spark SQL.
-- Comparar de forma didactica el rendimiento de Parquet vs CSV.
-- Organizar una demo final rapida para defensa academica.
+Después de clonar solo necesitas añadir los archivos de datos en la carpeta `./data` (si falta alguno) y continuar desde el **paso 4**.
 
-## 3. Tecnologias utilizadas
-- Apache Spark (procesamiento distribuido con DataFrames y Spark SQL).
-- Apache Zeppelin (exploracion, visualizacion y narrativa analitica).
-- Python y PySpark (scripts ETL y benchmarking).
-- Docker Compose (despliegue local simple).
-- Formato Parquet (almacenamiento columnar eficiente para analitica).
+> Si no clonas el repositorio, sigue la guía completa desde el paso 1.
 
-## 4. Arquitectura general
-Arquitectura principal (simple y defendible):
-1. Un contenedor de Zeppelin con interprete Spark en modo local (`local[*]`).
-2. Volumenes compartidos para datos, scripts, notebooks y resultados.
-3. Scripts Python/PySpark ejecutados dentro del contenedor con `spark-submit`.
+---
 
-Flujo funcional:
-1. Descarga de Parquet en `data/raw/`.
-2. Limpieza y transformacion en Spark.
-3. Salida limpia en `data/processed/clean_taxi_trips.parquet`.
-4. Muestra CSV para comparativa en `data/processed/sample_taxi_trips.csv`.
-5. Metricas de benchmark en `results/metricas_consultas.csv`.
-6. Analisis y graficos en Zeppelin usando los guiones de `notebooks/`.
+## Requisitos previos
 
-## 5. Dataset utilizado
-Fuente oficial:
-- NYC Taxi and Limousine Commission (TLC) Trip Record Data.
-- Endpoint usado para ficheros Yellow Taxi Parquet:
-  - `https://d37ci6vzurychx.cloudfront.net/trip-data/`
+Antes de empezar necesitas tener instalado en tu máquina Windows:
 
-Columnas clave del analisis:
-- `tpep_pickup_datetime`
-- `tpep_dropoff_datetime`
-- `passenger_count`
-- `trip_distance`
-- `PULocationID`
-- `DOLocationID`
-- `payment_type`
-- `fare_amount`
-- `tip_amount`
-- `total_amount`
-- `VendorID`
-- `RatecodeID`
+- **Docker Desktop** — https://www.docker.com/products/docker-desktop
+- **Git** (opcional, para clonar el proyecto) — https://git-scm.com
+- **VS Code** (recomendado para editar archivos) — https://code.visualstudio.com
 
-Archivo auxiliar opcional:
-- `taxi_zone_lookup.csv` para mapear `LocationID` a `borough`, `zone`, `service_zone`.
-- TODO: descargar manualmente y guardar en `data/lookup/taxi_zone_lookup.csv`.
+---
 
-## 6. Estructura del repositorio
-```text
+## 1. Configurar Docker Desktop
+
+Una vez instalado Docker Desktop:
+
+1. Abre Docker Desktop
+2. Ve a **Settings → General** y asegúrate de que **"Use the WSL 2 based engine"** está activado
+3. Haz clic en **Apply & Restart**
+
+Verifica que Docker funciona abriendo PowerShell y ejecutando:
+```powershell
+docker version
+```
+Debes ver la versión del cliente y del servidor sin errores.
+
+---
+
+## 2. Estructura del proyecto
+
+El proyecto debe tener esta estructura de carpetas:
+
+```
 big-data-zeppelin-spark-taxi-analysis/
-├── README.md
-├── docker-compose.yml
-├── .gitignore
-├── requirements.txt
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── lookup/
-├── notebooks/
-├── scripts/
-├── docs/
-├── figures/
-└── results/
+├── data/                         ← Dataset y archivos de salida
+│   ├── yellow_tripdata_2025-01.parquet
+│   ├── taxi_zone_lookup.csv
+│   ├── taxi_zones.shp
+│   ├── taxi_zones.dbf
+│   ├── taxi_zones.prj
+│   ├── taxi_zones.shx
+│   ├── taxi_zones.cpg
+│   └── nyc_taxi_zones.geojson    ← se genera en el paso 5
+├── notebooks/                    ← los notebooks de Zeppelin
+├── logs/                         ← logs de Zeppelin
+├── Dockerfile
+└── docker-compose.yml
 ```
 
-## 7. Instalacion y arranque
-### Requisitos previos
-- Docker Desktop + Docker Compose v2.
-- Espacio en disco suficiente (varios GB segun meses descargados).
-- Opcion A (recomendada): ejecutar scripts dentro del contenedor Zeppelin.
-- Opcion B (local): Python 3.10+ y Java 11/17 para PySpark.
-
-### Arranque rapido
-Desde la raiz del proyecto:
-```bash
-docker compose up -d
+Crea las carpetas que no existan:
+```powershell
+mkdir data, notebooks, logs
 ```
 
-Ver estado:
-```bash
-docker compose ps
+---
+
+## 3. Archivos de configuración
+
+### docker-compose.yml
+
+Crea el archivo `docker-compose.yml` en la raíz del proyecto con este contenido:
+
+```yaml
+services:
+  zeppelin:
+    build: .
+    container_name: zeppelin
+    ports:
+      - "8080:8080"
+    environment:
+      ZEPPELIN_ADDR: 0.0.0.0
+      SPARK_HOME: /opt/spark
+      SPARK_MASTER: spark://spark-master:7077
+    volumes:
+      - ./notebooks:/zeppelin/notebook
+      - ./data:/data
+      - ./logs:/zeppelin/logs
+      - spark_binaries:/opt/spark
+    depends_on:
+      - spark-master
+    networks:
+      - zeppelin-net
+
+  spark-master:
+    image: apache/spark:3.5.1
+    container_name: spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    ports:
+      - "7077:7077"
+      - "8081:8080"
+    volumes:
+      - spark_binaries:/opt/spark
+    networks:
+      - zeppelin-net
+
+  spark-worker-1:
+    image: apache/spark:3.5.1
+    container_name: spark-worker-1
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    environment:
+      SPARK_WORKER_MEMORY: 3g
+      SPARK_WORKER_CORES: 2
+    volumes:
+      - ./data:/data
+    depends_on:
+      - spark-master
+    networks:
+      - zeppelin-net
+
+volumes:
+  spark_binaries:
+
+networks:
+  zeppelin-net:
+    driver: bridge
 ```
 
-Parar servicios:
-```bash
-docker compose down
+### Dockerfile
+
+Crea el archivo `Dockerfile` en la raíz del proyecto:
+
+```dockerfile
+FROM apache/zeppelin:0.11.1
+USER root
+RUN find /opt/zeppelin/interpreter -name '._*' -delete
 ```
 
-## 8. Ejecucion del pipeline (paso a paso)
-### Paso 1: Descargar datos
-Ejemplo (enero-marzo 2023):
-```bash
-docker compose exec zeppelin python /opt/project/scripts/download_data.py --year 2023 --months 1 2 3
+---
+
+## 4. Arrancar el cluster
+
+Abre PowerShell en la carpeta del proyecto y ejecuta:
+
+```powershell
+docker-compose up -d
 ```
 
-### Paso 2: Limpiar y transformar con Spark
-```bash
-docker compose exec zeppelin spark-submit /opt/project/scripts/prepare_data.py --max-duration-minutes 240 --max-speed-mph 80
+La primera vez tardará varios minutos mientras descarga las imágenes. Verifica que los 3 contenedores están corriendo:
+
+```powershell
+docker ps
 ```
 
-### Paso 3: Exportar muestra CSV para comparativa
-```bash
-docker compose exec zeppelin spark-submit /opt/project/scripts/convert_sample_to_csv.py --sample-ratio 0.05 --sample-size 200000
+Debes ver `zeppelin`, `spark-master` y `spark-worker-1` con estado `Up`.
+
+---
+
+## 5. Generar el GeoJSON de zonas
+
+Copia los archivos del shapefile de zonas (`.shp`, `.dbf`, `.prj`, `.shx`, `.cpg`) a la carpeta `./data`.
+
+Instala las dependencias Python necesarias:
+
+```powershell
+docker exec -u root -it zeppelin bash -c "/opt/conda/envs/python_3_with_R/bin/pip install geopandas pyogrio"
 ```
 
-### Paso 4: Ejecutar benchmark didactico
-```bash
-docker compose exec zeppelin spark-submit /opt/project/scripts/benchmark_queries.py
+Instala las dependencias de numpy:
+
+```powershell
+docker exec -u root -it zeppelin bash -c "/opt/conda/envs/python_3_with_R/bin/pip install 'numpy<2' pyarrow folium"
 ```
 
-## 9. Abrir Zeppelin y usar notebooks
-- URL: `http://localhost:8080`
-- Los archivos de `notebooks/*.md` son guiones orientativos para copiar/adaptar en notebooks reales de Zeppelin.
-- TODO: importar o recrear notebooks reales en Zeppelin segun el guion.
+Crea el archivo `convert.py` en tu carpeta `./data` con este contenido:
 
-Orden sugerido de ejecucion:
-1. `01_carga_datos.md`
-2. `02_limpieza_transformacion.md`
-3. `03_analisis_temporal.md`
-4. `04_analisis_geografico_economico.md`
-5. `05_comparativa_rendimiento.md`
-6. `06_dashboard_final.md`
+```python
+import geopandas as gpd
+import pandas as pd
 
-## 10. Resultados esperados (pendiente de ejecutar)
-No se incluyen resultados inventados. Se espera generar, tras ejecutar en local:
-- `results/resumen_limpieza.csv`
-- `results/metricas_consultas.csv`
-- Graficos en Zeppelin (viajes por hora, coste medio por hora, zonas top, etc.)
+gdf = gpd.read_file('/data/taxi_zones.shp')
+gdf = gdf.to_crs(epsg=4326)
 
-Etiqueta recomendada para entregables temporales:
-- `ejemplo`
-- `pendiente de ejecutar`
+lookup = pd.read_csv('/data/taxi_zone_lookup.csv')
+gdf = gdf.merge(lookup[['LocationID', 'service_zone']], on='LocationID', how='left')
 
-## 11. Que no se sube al repositorio
-- Datasets masivos descargados (`data/raw/*.parquet`).
-- Salidas pesadas de procesamiento (`data/processed/*.parquet`, `data/processed/*.csv`).
-- Resultados generados en ejecucion (`results/*.csv`, salvo ejemplos pequenos si se acuerda).
-- Artefactos temporales y caches.
+gdf.to_file('/data/nyc_taxi_zones.geojson', driver='GeoJSON')
+print('GeoJSON generado correctamente')
+print(gdf.columns.tolist())
+```
 
-## 12. Problemas frecuentes
-1. Puerto 8080 ocupado.
-- Cambiar el mapeo en `docker-compose.yml` (por ejemplo `18080:8080`).
+Ejecútalo:
 
-2. Memoria insuficiente al procesar muchos meses.
-- Reducir meses analizados.
-- Aumentar memoria de Docker Desktop.
-- Ajustar limites en scripts (muestra, particiones, etc.).
+```powershell
+docker exec -u root -it zeppelin bash -c "/opt/conda/envs/python_3_with_R/bin/python3 /data/convert.py"
+```
 
-3. Error al leer CSV de muestra.
-- Verificar que se ejecuto `convert_sample_to_csv.py` antes del benchmark.
+Verás el mensaje `GeoJSON generado correctamente` al finalizar.
 
-4. Diferencias de rendimiento poco claras.
-- Usar mismo tamano de muestra.
-- Repetir consultas varias veces y comentar sesgos de cache.
+---
 
-## 13. Puntos clave para defensa tecnica
-- Por que Spark: procesamiento distribuido, API DataFrame y Spark SQL para escalar analitica.
-- Por que Zeppelin: cuaderno colaborativo para codigo, consultas y visualizaciones en una sola herramienta.
-- Por que Parquet: formato columnar comprimido, lectura selectiva de columnas y mejor rendimiento analitico.
-- Que es DataFrame: abstraccion tabular distribuida con optimizacion interna (Catalyst/Tungsten).
-- Que aporta Spark SQL: consultas declarativas y optimizadas sobre datos distribuidos.
-- Que limpieza se aplica: reglas sobre fechas, duracion, distancia, importes y velocidad.
-- Limitaciones en local: recursos limitados, no hay cluster real ni tolerancia completa a fallos.
-- Escalado futuro: migrar a cluster Spark real (Standalone/YARN/Kubernetes), almacenamiento distribuido y orquestacion.
+## 6. Configurar el intérprete Spark en Zeppelin
 
-## 14. TODOs de intervencion manual
-- TODO: descargar `taxi_zone_lookup.csv` y guardarlo en `data/lookup/`.
-- TODO: ajustar anios y meses de analisis para la entrega final.
-- TODO: importar o recrear notebooks reales en Zeppelin.
-- TODO: anadir capturas y tablas reales en la memoria/presentacion.
-- TODO: validar resultados en el entorno local del grupo.
+1. Abre el navegador y ve a **http://localhost:8080**
+2. Haz clic en tu usuario (arriba derecha) → **Interpreter**
+3. Busca `spark` y haz clic en **Edit**
+4. Configura estas propiedades:
 
-## 15. Creditos y declaracion de uso academico
-Proyecto desarrollado con fines docentes para la asignatura Complementos de Bases de Datos.
+| Propiedad | Valor |
+|---|---|
+| `master` | `spark://spark-master:7077` |
+| `SPARK_HOME` | `/opt/spark` |
+| `spark.executor.memory` | `2g` |
+| `spark.driver.memory` | `1g` |
+| `spark.executor.cores` | `2` |
 
-El uso de IA se ha realizado como apoyo tecnico para:
-- ideacion de estructura;
-- asistencia en scripts y documentacion;
-- revision conceptual.
+5. Haz clic en **Save** y luego en **Restart**
 
-Todo contenido debe ser revisado, comprendido y adaptado por el equipo antes de su entrega.
+---
+
+## 7. Ejecutar los notebooks
+
+1. En Zeppelin haz clic en **Import note**
+2. Ejecuta las celdas **en orden**, empezando siempre por la **Celda 1** que carga y preprocesa los datos
+3. Verifica que la Celda 1 termina con el mensaje `Total registros: XXXXXXX`
+
+> **Importante:** Cada vez que reinicias los contenedores hay que volver a ejecutar la Celda 1 para recrear el DataFrame `dfFinal` en memoria.
+
+---
+
+## 8. Accesos útiles
+
+| Servicio | URL |
+|---|---|
+| Zeppelin (notebooks) | http://localhost:8080 |
+| Spark Master UI | http://localhost:8081 |
+
+---
+
+## 9. Comandos útiles
+
+**Arrancar el cluster:**
+```powershell
+docker-compose up -d
+```
+
+**Parar el cluster:**
+```powershell
+docker-compose down
+```
+
+**Reiniciar solo Zeppelin:**
+```powershell
+docker restart zeppelin
+```
+
+**Limpiar archivos basura (ejecutar tras cada reinicio si es necesario):**
+```powershell
+docker exec -u root -it zeppelin bash -c "find /opt/zeppelin/interpreter -name '._*' -delete"
+```
+
+---
+
+## 10. Solución de problemas frecuentes
+
+### Zeppelin no arranca
+Comprueba los logs con `docker logs zeppelin`. Si ves `exec /usr/bin/tini: no such file or directory`, reconstruye la imagen:
+```powershell
+docker-compose down
+docker rmi big-data-zeppelin-spark-taxi-analysis-zeppelin
+docker builder prune -f
+docker-compose up -d --build
+```
+
+### El intérprete Spark da error de conexión
+Verifica que los 3 contenedores están corriendo con `docker ps`. Si falta alguno, ejecuta `docker-compose up -d` de nuevo.
+
+### Error "dfFinal not found"
+El intérprete se reinició y perdió el DataFrame. Vuelve a ejecutar la Celda 1 del notebook.
+
+### Los mapas no se generan
+Verifica que folium está instalado:
+```powershell
+docker exec -u root -it zeppelin bash -c "/opt/conda/envs/python_3_with_R/bin/pip install folium"
+```
+Y reinicia el intérprete Python en Zeppelin → Interpreter → python → Restart.
+
+### Puerto 8080 ocupado
+Cambia el mapeo en `docker-compose.yml`:
+```yaml
+ports:
+  - "8888:8080"
+```
+Y accede por `http://localhost:8888`.

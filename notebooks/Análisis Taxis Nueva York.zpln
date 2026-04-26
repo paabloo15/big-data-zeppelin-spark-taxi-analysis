@@ -1,0 +1,1319 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark\r\nimport org.apache.spark.sql.functions._\r\n\r\nval df = spark.read\r\n  .parquet(\"/data/yellow_tripdata_2025-01.parquet\")\r\n\r\ndf.printSchema()\r\nprintln(s\"Total registros: ${df.count()}\")\r\ndf.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:03+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- VendorID: integer (nullable = true)\n |-- tpep_pickup_datetime: timestamp_ntz (nullable = true)\n |-- tpep_dropoff_datetime: timestamp_ntz (nullable = true)\n |-- passenger_count: long (nullable = true)\n |-- trip_distance: double (nullable = true)\n |-- RatecodeID: long (nullable = true)\n |-- store_and_fwd_flag: string (nullable = true)\n |-- PULocationID: integer (nullable = true)\n |-- DOLocationID: integer (nullable = true)\n |-- payment_type: long (nullable = true)\n |-- fare_amount: double (nullable = true)\n |-- extra: double (nullable = true)\n |-- mta_tax: double (nullable = true)\n |-- tip_amount: double (nullable = true)\n |-- tolls_amount: double (nullable = true)\n |-- improvement_surcharge: double (nullable = true)\n |-- total_amount: double (nullable = true)\n |-- congestion_surcharge: double (nullable = true)\n |-- Airport_fee: double (nullable = true)\n |-- cbd_congestion_fee: double (nullable = true)\n\nTotal registros: 3475226\n+--------+--------------------+---------------------+---------------+-------------+----------+------------------+------------+------------+------------+-----------+-----+-------+----------+------------+---------------------+------------+--------------------+-----------+------------------+\n|VendorID|tpep_pickup_datetime|tpep_dropoff_datetime|passenger_count|trip_distance|RatecodeID|store_and_fwd_flag|PULocationID|DOLocationID|payment_type|fare_amount|extra|mta_tax|tip_amount|tolls_amount|improvement_surcharge|total_amount|congestion_surcharge|Airport_fee|cbd_congestion_fee|\n+--------+--------------------+---------------------+---------------+-------------+----------+------------------+------------+------------+------------+-----------+-----+-------+----------+------------+---------------------+------------+--------------------+-----------+------------------+\n|       1| 2025-01-01 00:18:38|  2025-01-01 00:26:59|              1|          1.6|         1|                 N|         229|         237|           1|       10.0|  3.5|    0.5|       3.0|         0.0|                  1.0|        18.0|                 2.5|        0.0|               0.0|\n|       1| 2025-01-01 00:32:40|  2025-01-01 00:35:13|              1|          0.5|         1|                 N|         236|         237|           1|        5.1|  3.5|    0.5|      2.02|         0.0|                  1.0|       12.12|                 2.5|        0.0|               0.0|\n|       1| 2025-01-01 00:44:04|  2025-01-01 00:46:01|              1|          0.6|         1|                 N|         141|         141|           1|        5.1|  3.5|    0.5|       2.0|         0.0|                  1.0|        12.1|                 2.5|        0.0|               0.0|\n|       2| 2025-01-01 00:14:27|  2025-01-01 00:20:01|              3|         0.52|         1|                 N|         244|         244|           2|        7.2|  1.0|    0.5|       0.0|         0.0|                  1.0|         9.7|                 0.0|        0.0|               0.0|\n|       2| 2025-01-01 00:21:34|  2025-01-01 00:25:06|              3|         0.66|         1|                 N|         244|         116|           2|        5.8|  1.0|    0.5|       0.0|         0.0|                  1.0|         8.3|                 0.0|        0.0|               0.0|\n+--------+--------------------+---------------------+---------------+-------------+----------+------------------+------------+------------+------------+-----------+-----+-------+----------+------------+---------------------+------------+--------------------+-----------+------------------+\nonly showing top 5 rows\n\nimport org.apache.spark.sql.functions._\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [VendorID: int, tpep_pickup_datetime: timestamp_ntz ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=249",
+              "$$hashKey": "object:52104"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=250",
+              "$$hashKey": "object:52105"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=251",
+              "$$hashKey": "object:52106"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=252",
+              "$$hashKey": "object:52107"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777212529582_1499133355",
+      "id": "paragraph_1777198673526_301354601",
+      "dateCreated": "2026-04-26T14:08:49+0000",
+      "dateStarted": "2026-04-26T16:04:03+0000",
+      "dateFinished": "2026-04-26T16:04:04+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:48079"
+    },
+    {
+      "text": "%spark\r\n\r\nval dfClean = df\r\n  // Eliminar filas con nulos en columnas críticas\r\n  .filter(col(\"tpep_pickup_datetime\").isNotNull)\r\n  .filter(col(\"tpep_dropoff_datetime\").isNotNull)\r\n  .filter(col(\"trip_distance\").isNotNull)\r\n  .filter(col(\"fare_amount\").isNotNull)\r\n  .filter(col(\"total_amount\").isNotNull)\r\n  .filter(col(\"PULocationID\").isNotNull)\r\n  .filter(col(\"DOLocationID\").isNotNull)\r\n  .filter(col(\"PULocationID\").between(1, 263))\r\n  .filter(col(\"DOLocationID\").between(1, 263))\r\n\r\n  // Distancia debe ser positiva\r\n  .filter(col(\"trip_distance\") > 0)\r\n\r\n  // Debe haber mínimo un pasajero\r\n  .filter(col(\"passenger_count\") >= 1)\r\n    \r\n  // Tarifa debe ser positiva\r\n  .filter(col(\"fare_amount\") > 0)\r\n  .filter(col(\"total_amount\") > 0)\r\n\r\n  // Fechas dentro del rango esperado del dataset\r\n  .filter(year(col(\"tpep_pickup_datetime\")) === 2025)\r\n\r\n  // Dropoff debe ser posterior al pickup\r\n  .filter(col(\"tpep_dropoff_datetime\") > col(\"tpep_pickup_datetime\"))\r\n\r\ndfClean.cache()\r\n\r\nval totalRegistros = df.count()\r\nval descartados = totalRegistros - dfClean.count()\r\nprintln(f\"Registros originales:  $totalRegistros%7d\")\r\nprintln(f\"Registros limpios:     ${dfClean.count()}%7d\")\r\nprintln(f\"Registros descartados: $descartados%7d (${descartados * 100.0 / totalRegistros}%.2f%%)\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:04+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Registros originales:  3475226\nRegistros limpios:     2791169\nRegistros descartados:  684057 (19.68%)\n\u001b[1m\u001b[34mdfClean\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [VendorID: int, tpep_pickup_datetime: timestamp_ntz ... 18 more fields]\n\u001b[1m\u001b[34mtotalRegistros\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 3475226\n\u001b[1m\u001b[34mdescartados\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 684057\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=253",
+              "$$hashKey": "object:52256"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=254",
+              "$$hashKey": "object:52257"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=255",
+              "$$hashKey": "object:52258"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=256",
+              "$$hashKey": "object:52259"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=257",
+              "$$hashKey": "object:52260"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=258",
+              "$$hashKey": "object:52261"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777212529582_239645505",
+      "id": "paragraph_1777198693278_1776760101",
+      "dateCreated": "2026-04-26T14:08:49+0000",
+      "dateStarted": "2026-04-26T16:04:04+0000",
+      "dateFinished": "2026-04-26T16:04:05+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48080"
+    },
+    {
+      "text": "%spark\r\nimport org.apache.spark.sql.functions._\r\n\r\n// Cargar zonas desde GeoJSON\r\nval zonasRaw = spark.read\r\n  .option(\"multiline\", \"true\")\r\n  .json(\"/data/nyc_taxi_zones.geojson\")\r\n\r\n// Explotar el array de features\r\nval zonas = zonasRaw\r\n  .select(explode(col(\"features\")).alias(\"feature\"))\r\n  .select(\r\n    col(\"feature.properties.LocationID\").cast(\"integer\").alias(\"LocationID\"),\r\n    col(\"feature.properties.zone\").alias(\"Zone\"),\r\n    col(\"feature.properties.borough\").alias(\"Borough\"),\r\n    col(\"feature.properties.service_zone\").alias(\"service_zone\")\r\n  )\r\n\r\n// Zonas de recogida\r\nval zonasRecogida = zonas\r\n  .withColumnRenamed(\"LocationID\", \"pu_id\")\r\n  .withColumnRenamed(\"Zone\", \"zona_recogida\")\r\n  .withColumnRenamed(\"Borough\", \"borough_recogida\")\r\n  .withColumnRenamed(\"service_zone\", \"service_zone_recogida\")\r\n\r\n// Zonas de destino\r\nval zonasDestino = zonas\r\n  .withColumnRenamed(\"LocationID\", \"do_id\")\r\n  .withColumnRenamed(\"Zone\", \"zona_destino\")\r\n  .withColumnRenamed(\"Borough\", \"borough_destino\")\r\n  .withColumnRenamed(\"service_zone\", \"service_zone_destino\")\r\n\r\n// Join por ID numérico\r\nval dfConZonas = dfClean\r\n  .join(zonasRecogida, df(\"PULocationID\") === col(\"pu_id\"), \"left\")\r\n  .drop(\"pu_id\")\r\n  .join(zonasDestino, df(\"DOLocationID\") === col(\"do_id\"), \"left\")\r\n  .drop(\"do_id\")\r\n\r\n// Traducir códigos a texto y añadir duración\r\nval dfFinal = dfConZonas\r\n  .withColumn(\"vendor\",\r\n    when(col(\"VendorID\") === 1, \"Creative Mobile Technologies\")\r\n    .when(col(\"VendorID\") === 2, \"VeriFone Inc\")\r\n    .otherwise(\"Desconocido\")\r\n  )\r\n  .withColumn(\"tipo_pago\",\r\n    when(col(\"payment_type\") === 1, \"Tarjeta\")\r\n    .when(col(\"payment_type\") === 2, \"Efectivo\")\r\n    .when(col(\"payment_type\") === 3, \"Sin cargo\")\r\n    .when(col(\"payment_type\") === 4, \"Disputa\")\r\n    .when(col(\"payment_type\") === 5, \"Desconocido\")\r\n    .when(col(\"payment_type\") === 6, \"Viaje anulado\")\r\n    .otherwise(\"Otro\")\r\n  )\r\n  .withColumn(\"tarifa_tipo\",\r\n    when(col(\"RatecodeID\") === 1, \"Estándar\")\r\n    .when(col(\"RatecodeID\") === 2, \"JFK\")\r\n    .when(col(\"RatecodeID\") === 3, \"Newark\")\r\n    .when(col(\"RatecodeID\") === 4, \"Nassau/Westchester\")\r\n    .when(col(\"RatecodeID\") === 5, \"Tarifa negociada\")\r\n    .when(col(\"RatecodeID\") === 6, \"Viaje en grupo\")\r\n    .otherwise(\"Desconocido\")\r\n  )\r\n  .withColumn(\"store_and_fwd\",\r\n    when(col(\"store_and_fwd_flag\") === \"Y\", \"Sí\")\r\n    .when(col(\"store_and_fwd_flag\") === \"N\", \"No\")\r\n    .otherwise(\"Desconocido\")\r\n  )\r\n  .withColumn(\"duracion_minutos\",\r\n    round((unix_timestamp(col(\"tpep_dropoff_datetime\")) -\r\n           unix_timestamp(col(\"tpep_pickup_datetime\"))) / 60, 2)\r\n  )\r\n  .drop(\"VendorID\", \"payment_type\", \"RatecodeID\", \"store_and_fwd_flag\")\r\n\r\ndfFinal.cache()\r\nprintln(s\"Total registros: ${dfFinal.count()}\")\r\ndfFinal.createOrReplaceTempView(\"dfFinal\")\r\ndfFinal.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:05+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Total registros: 2791169\nroot\n |-- tpep_pickup_datetime: timestamp_ntz (nullable = true)\n |-- tpep_dropoff_datetime: timestamp_ntz (nullable = true)\n |-- passenger_count: long (nullable = true)\n |-- trip_distance: double (nullable = true)\n |-- PULocationID: integer (nullable = true)\n |-- DOLocationID: integer (nullable = true)\n |-- fare_amount: double (nullable = true)\n |-- extra: double (nullable = true)\n |-- mta_tax: double (nullable = true)\n |-- tip_amount: double (nullable = true)\n |-- tolls_amount: double (nullable = true)\n |-- improvement_surcharge: double (nullable = true)\n |-- total_amount: double (nullable = true)\n |-- congestion_surcharge: double (nullable = true)\n |-- Airport_fee: double (nullable = true)\n |-- cbd_congestion_fee: double (nullable = true)\n |-- zona_recogida: string (nullable = true)\n |-- borough_recogida: string (nullable = true)\n |-- service_zone_recogida: string (nullable = true)\n |-- zona_destino: string (nullable = true)\n |-- borough_destino: string (nullable = true)\n |-- service_zone_destino: string (nullable = true)\n |-- vendor: string (nullable = false)\n |-- tipo_pago: string (nullable = false)\n |-- tarifa_tipo: string (nullable = false)\n |-- store_and_fwd: string (nullable = false)\n |-- duracion_minutos: double (nullable = true)\n\nimport org.apache.spark.sql.functions._\n\u001b[1m\u001b[34mzonasRaw\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [crs: struct<properties: struct<name: string>, type: string>, features: array<struct<geometry:struct<coordinates:array<array<array<string>>>,type:string>,properties:struct<LocationID:bigint,OBJECTID:bigint,Shape_Area:double,Shape_Leng:double,borough:string,service_zone:string,zone:string>,type:string>> ... 2 more fields]\n\u001b[1m\u001b[34mzonas\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [LocationID: int, Zone: string ... 2 more fields]\n\u001b[1m\u001b[34mzonasRecogida\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [pu_id: int, zona_recogida: string ... 2 more fields]\n\u001b[1m\u001b[34mzonasDestino\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [do_id: int, zona_destino: string ... 2 more fie...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=259",
+              "$$hashKey": "object:52341"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=260",
+              "$$hashKey": "object:52342"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=261",
+              "$$hashKey": "object:52343"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777212529582_423719800",
+      "id": "paragraph_1777199032854_854991993",
+      "dateCreated": "2026-04-26T14:08:49+0000",
+      "dateStarted": "2026-04-26T16:04:05+0000",
+      "dateFinished": "2026-04-26T16:04:06+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48081"
+    },
+    {
+      "text": "%spark\r\n\r\n// Viajes por hora\r\n\r\nval viajesPorHora = spark.sql(\"\"\"\r\n  SELECT \r\n    HOUR(tpep_pickup_datetime) AS hora, \r\n    COUNT(*) AS viajes,\r\n    ROUND(AVG(fare_amount), 2) AS tarifa_media,\r\n    ROUND(AVG(duracion_minutos), 2) AS duracion_media\r\n  FROM dfFinal\r\n  GROUP BY HOUR(tpep_pickup_datetime)\r\n  ORDER BY hora\r\n\"\"\")\r\n\r\nz.show(viajesPorHora)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:06+0000",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "hora": "string",
+                      "viajes": "string",
+                      "tarifa_media": "string",
+                      "duracion_media": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "hora",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "viajes",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "hora\tviajes\ttarifa_media\tduracion_media\n0\t64303\t18.62\t13.8\n1\t43166\t16.7\t12.72\n2\t29153\t15.73\t12.52\n3\t18963\t16.75\t12.25\n4\t12175\t22.64\t14.27\n5\t15156\t26.46\t16.77\n6\t34379\t21.11\t15.74\n7\t73439\t18.27\t15.22\n8\t104942\t16.76\t15.2\n9\t121265\t16.9\t14.99\n10\t132562\t17.16\t14.96\n11\t143582\t17.04\t15.36\n12\t155900\t22.86\t15.25\n13\t164641\t17.86\t15.67\n14\t177244\t18.43\t16.55\n15\t186439\t18.43\t16.73\n16\t189081\t18.51\t16.75\n17\t205245\t17.12\t15.7\n18\t204191\t16.14\t14.19\n19\t173040\t16.75\t13.81\n20\t156358\t17.39\t13.65\n21\t159951\t17.65\t13.92\n22\t132794\t18.15\t14.18\n23\t93200\t19.16\t14.06\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mviajesPorHora\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [hora: int, viajes: bigint ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=262",
+              "$$hashKey": "object:52490"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=263",
+              "$$hashKey": "object:52491"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777214800184_187903402",
+      "id": "paragraph_1777214800184_187903402",
+      "dateCreated": "2026-04-26T14:46:40+0000",
+      "dateStarted": "2026-04-26T16:04:06+0000",
+      "dateFinished": "2026-04-26T16:04:06+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48082"
+    },
+    {
+      "text": "%spark\r\n\r\n// Tarifa y duración media por horas\r\n\r\nval viajesPorHora = spark.sql(\"\"\"\r\n  SELECT \r\n    HOUR(tpep_pickup_datetime) AS hora, \r\n    COUNT(*) AS viajes,\r\n    ROUND(AVG(fare_amount), 2) AS `Tarifa media`,\r\n    ROUND(AVG(duracion_minutos), 2) AS `Duracion media`\r\n  FROM dfFinal\r\n  GROUP BY HOUR(tpep_pickup_datetime)\r\n  ORDER BY hora\r\n\"\"\")\r\n\r\nz.show(viajesPorHora)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:06+0000",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "hora": "string",
+                      "viajes": "string",
+                      "tarifa_media": "string",
+                      "duracion_media": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "hora",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "Tarifa media",
+                  "index": 2,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "Duracion media",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "hora\tviajes\tTarifa media\tDuracion media\n0\t64303\t18.62\t13.8\n1\t43166\t16.7\t12.72\n2\t29153\t15.73\t12.52\n3\t18963\t16.75\t12.25\n4\t12175\t22.64\t14.27\n5\t15156\t26.46\t16.77\n6\t34379\t21.11\t15.74\n7\t73439\t18.27\t15.22\n8\t104942\t16.76\t15.2\n9\t121265\t16.9\t14.99\n10\t132562\t17.16\t14.96\n11\t143582\t17.04\t15.36\n12\t155900\t22.86\t15.25\n13\t164641\t17.86\t15.67\n14\t177244\t18.43\t16.55\n15\t186439\t18.43\t16.73\n16\t189081\t18.51\t16.75\n17\t205245\t17.12\t15.7\n18\t204191\t16.14\t14.19\n19\t173040\t16.75\t13.81\n20\t156358\t17.39\t13.65\n21\t159951\t17.65\t13.92\n22\t132794\t18.15\t14.18\n23\t93200\t19.16\t14.06\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mviajesPorHora\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [hora: int, viajes: bigint ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=264",
+              "$$hashKey": "object:52684"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=265",
+              "$$hashKey": "object:52685"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777214431475_129734667",
+      "id": "paragraph_1777214431475_129734667",
+      "dateCreated": "2026-04-26T14:40:31+0000",
+      "dateStarted": "2026-04-26T16:04:06+0000",
+      "dateFinished": "2026-04-26T16:04:07+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48083"
+    },
+    {
+      "text": "%spark\n\n// Impacto del Año Nuevo en la demanda por hora\n\nz.show(\nspark.sql(\"\"\"\nSELECT\n  HOUR(tpep_pickup_datetime) AS hora,\n  CASE\n    WHEN DAY(tpep_pickup_datetime)=1 THEN '1 Enero'\n    ELSE 'Resto'\n  END AS tipo_dia,\n  ROUND(\n    COUNT(*) / COUNT(DISTINCT DAY(tpep_pickup_datetime)),\n    2\n  ) AS viajes_por_dia\nFROM dfFinal\nGROUP BY hora, tipo_dia\nORDER BY hora\n\"\"\")\n)\n",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:07+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {
+                    "columns": [
+                      {
+                        "name": "hora0",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "viajes_1ene1",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      },
+                      {
+                        "name": "viajes_resto2",
+                        "visible": true,
+                        "width": "*",
+                        "sort": {},
+                        "filters": [
+                          {}
+                        ],
+                        "pinned": ""
+                      }
+                    ],
+                    "scrollFocus": {},
+                    "selection": [],
+                    "grouping": {
+                      "grouping": [],
+                      "aggregations": [],
+                      "rowExpandedStates": {}
+                    },
+                    "treeView": {},
+                    "pagination": {
+                      "paginationCurrentPage": 1,
+                      "paginationPageSize": 250
+                    }
+                  },
+                  "tableColumnTypeState": {
+                    "names": {
+                      "hora": "string",
+                      "tipo_dia": "string",
+                      "viajes_por_dia": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "hora",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "tipo_dia",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "viajes_por_dia",
+                  "index": 2,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "hora\ttipo_dia\tviajes_por_dia\n0\t1 Enero\t5607.0\n0\tResto\t1956.53\n1\t1 Enero\t5454.0\n1\tResto\t1257.07\n2\t1 Enero\t4536.0\n2\tResto\t820.57\n3\t1 Enero\t3122.0\n3\tResto\t528.03\n4\t1 Enero\t1868.0\n4\tResto\t343.57\n5\tResto\t478.47\n5\t1 Enero\t802.0\n6\t1 Enero\t748.0\n6\tResto\t1121.03\n7\t1 Enero\t769.0\n7\tResto\t2422.33\n8\t1 Enero\t877.0\n8\tResto\t3468.83\n9\t1 Enero\t1233.0\n9\tResto\t4001.07\n10\t1 Enero\t1900.0\n10\tResto\t4355.4\n11\t1 Enero\t2625.0\n11\tResto\t4698.57\n12\tResto\t5086.17\n12\t1 Enero\t3315.0\n13\tResto\t5358.47\n13\t1 Enero\t3887.0\n14\tResto\t5766.57\n14\t1 Enero\t4247.0\n15\tResto\t6071.4\n15\t1 Enero\t4297.0\n16\t1 Enero\t4005.0\n16\tResto\t6169.2\n17\tResto\t6708.87\n17\t1 Enero\t3979.0\n18\t1 Enero\t3679.0\n18\tResto\t6683.73\n19\t1 Enero\t3219.0\n19\tResto\t5660.7\n20\tResto\t5117.47\n20\t1 Enero\t2834.0\n21\t1 Enero\t2822.0\n21\tResto\t5237.63\n22\t1 Enero\t2284.0\n22\tResto\t4350.33\n23\t1 Enero\t1461.0\n23\tResto\t3057.97\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=266",
+              "$$hashKey": "object:52877"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=267",
+              "$$hashKey": "object:52878"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=268",
+              "$$hashKey": "object:52879"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777213143538_1042532062",
+      "id": "paragraph_1777213143538_1042532062",
+      "dateCreated": "2026-04-26T14:19:03+0000",
+      "dateStarted": "2026-04-26T16:04:07+0000",
+      "dateFinished": "2026-04-26T16:04:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48084"
+    },
+    {
+      "text": "%spark\n\n// Eficiencia del viaje por distrito\n\nz.show(\n  spark.sql(\"\"\"\n    SELECT\n      borough_recogida,\n      ROUND(AVG(trip_distance), 2) AS distancia_media_millas,\n      ROUND(AVG(duracion_minutos), 2) AS duracion_media_min,\n      ROUND(AVG(fare_amount), 2) AS tarifa_media,\n      ROUND(AVG(trip_distance) / AVG(duracion_minutos) * 60, 2) AS velocidad_mph,\n      ROUND(AVG(fare_amount) / AVG(trip_distance), 2) AS coste_por_milla\n    FROM dfFinal\n    WHERE borough_recogida IS NOT NULL\n    AND trip_distance > 0\n    AND duracion_minutos > 0\n    GROUP BY borough_recogida\n    ORDER BY velocidad_mph ASC\n  \"\"\")\n)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:08+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "borough_recogida": "string",
+                      "distancia_media_millas": "string",
+                      "duracion_media_min": "string",
+                      "tarifa_media": "string",
+                      "velocidad_mph": "string",
+                      "coste_por_milla": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [],
+              "groups": [],
+              "values": []
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "borough_recogida\tdistancia_media_millas\tduracion_media_min\ttarifa_media\tvelocidad_mph\tcoste_por_milla\nManhattan\t2.2\t13.01\t14.28\t10.13\t6.5\nBrooklyn\t8.38\t35.58\t28.61\t14.13\t3.41\nBronx\t17.03\t45.84\t36.08\t22.28\t2.12\nQueens\t12.54\t33.67\t55.56\t22.35\t4.43\nStaten Island\t5.89\t12.55\t7.4\t28.18\t1.26\nEWR\t4.34\t8.3\t77.67\t31.37\t17.91\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=269",
+              "$$hashKey": "object:53058"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=270",
+              "$$hashKey": "object:53059"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777213170092_1582196644",
+      "id": "paragraph_1777213170092_1582196644",
+      "dateCreated": "2026-04-26T14:19:30+0000",
+      "dateStarted": "2026-04-26T16:04:08+0000",
+      "dateFinished": "2026-04-26T16:04:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48085"
+    },
+    {
+      "text": "%spark\n\n// Viajes al aeropuerto vs viajes normales\n\nz.show(\n  spark.sql(\"\"\"\n    SELECT\n      CASE\n        WHEN tarifa_tipo IN ('JFK', 'Newark') THEN 'Aeropuerto'\n        ELSE 'Estándar'\n      END AS tipo_viaje,\n      COUNT(*) AS viajes,\n      ROUND(AVG(trip_distance), 2) AS distancia_media,\n      ROUND(AVG(duracion_minutos), 2) AS duracion_media,\n      ROUND(AVG(fare_amount), 2) AS tarifa_media,\n      ROUND(AVG(tip_amount), 2) AS propina_media,\n      ROUND(AVG(tip_amount) / AVG(fare_amount) * 100, 2) AS propina_pct,\n      ROUND(AVG(passenger_count), 2) AS pasajeros_medios\n    FROM dfFinal\n    GROUP BY tipo_viaje\n    ORDER BY viajes DESC\n  \"\"\")\n)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:09+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "tipo_viaje": "string",
+                      "viajes": "string",
+                      "distancia_media": "string",
+                      "duracion_media": "string",
+                      "tarifa_media": "string",
+                      "propina_media": "string",
+                      "propina_pct": "string",
+                      "pasajeros_medios": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "tipo_viaje\tviajes\tdistancia_media\tduracion_media\ttarifa_media\tpropina_media\tpropina_pct\tpasajeros_medios\nEstándar\t2696555\t2.65\t13.99\t16.1\t3.18\t19.72\t1.3\nAeropuerto\t94614\t17.71\t44.66\t70.88\t11.91\t16.8\t1.52\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=271",
+              "$$hashKey": "object:53734"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=272",
+              "$$hashKey": "object:53735"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777216134998_107361213",
+      "id": "paragraph_1777216134998_107361213",
+      "dateCreated": "2026-04-26T15:08:54+0000",
+      "dateStarted": "2026-04-26T16:04:09+0000",
+      "dateFinished": "2026-04-26T16:04:09+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48086"
+    },
+    {
+      "text": "%spark\n\n// Demanda por franja horaria en laborable vs fin de semana\n\nz.show(\n  spark.sql(\"\"\"\n    SELECT\n      CASE\n        WHEN HOUR(tpep_pickup_datetime) BETWEEN 6 AND 11  THEN '1. Mañana (6-12h)'\n        WHEN HOUR(tpep_pickup_datetime) BETWEEN 12 AND 17 THEN '2. Tarde (12-18h)'\n        WHEN HOUR(tpep_pickup_datetime) BETWEEN 18 AND 22 THEN '3. Noche (18-23h)'\n        ELSE '4. Madrugada (23-6h)'\n      END AS franja,\n      CASE\n        WHEN DAYOFWEEK(tpep_pickup_datetime) IN (1, 7) THEN 'Fin de semana'\n        ELSE 'Laborable'\n      END AS tipo_semana,\n      COUNT(*) AS viajes_totales,\n      COUNT(DISTINCT DATE(tpep_pickup_datetime)) AS num_dias,\n      ROUND(COUNT(*) / COUNT(DISTINCT DATE(tpep_pickup_datetime)), 2) AS viajes_por_dia,\n      ROUND(AVG(total_amount), 2) AS tarifa_media,\n      ROUND(AVG(duracion_minutos), 2) AS duracion_media\n    FROM dfFinal\n    GROUP BY franja, tipo_semana\n    ORDER BY franja, tipo_semana\n  \"\"\")\n)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:09+0000",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "franja": "string",
+                      "tipo_semana": "string",
+                      "viajes_totales": "string",
+                      "num_dias": "string",
+                      "viajes_por_dia": "string",
+                      "tarifa_media": "string",
+                      "duracion_media": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "franja",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "tipo_semana",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "viajes_por_dia",
+                  "index": 4,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "franja\ttipo_semana\tviajes_totales\tnum_dias\tviajes_por_dia\ttarifa_media\tduracion_media\n1. Mañana (6-12h)\tFin de semana\t113778\t8\t14222.25\t25.67\t12.55\n1. Mañana (6-12h)\tLaborable\t496391\t23\t21582.22\t25.67\t15.78\n2. Tarde (12-18h)\tFin de semana\t272029\t8\t34003.63\t26.17\t14.98\n2. Tarde (12-18h)\tLaborable\t806521\t23\t35066.13\t28.78\t16.52\n3. Noche (18-23h)\tFin de semana\t183393\t8\t22924.13\t27.03\t14.52\n3. Noche (18-23h)\tLaborable\t642941\t23\t27953.96\t27.31\t13.79\n4. Madrugada (23-6h)\tFin de semana\t121512\t9\t13501.33\t25.49\t12.44\n4. Madrugada (23-6h)\tLaborable\t154604\t23\t6721.91\t30.5\t14.62\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=273",
+              "$$hashKey": "object:54373"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=274",
+              "$$hashKey": "object:54374"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=275",
+              "$$hashKey": "object:54375"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777216358715_1838014737",
+      "id": "paragraph_1777216358715_1838014737",
+      "dateCreated": "2026-04-26T15:12:38+0000",
+      "dateStarted": "2026-04-26T16:04:09+0000",
+      "dateFinished": "2026-04-26T16:04:10+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48087"
+    },
+    {
+      "text": "%spark\r\n\r\n//Pasajeros y su impacto en propina y tarifa\r\n\r\nz.show(\r\n  spark.sql(\"\"\"\r\n    SELECT\r\n      CAST(passenger_count AS INT) AS pasajeros,\r\n      COUNT(*) AS viajes,\r\n      ROUND(AVG(fare_amount), 2) AS tarifa_media,\r\n      ROUND(AVG(tip_amount), 2) AS propina_media,\r\n      ROUND(AVG(trip_distance), 2) AS distancia_media,\r\n      ROUND(AVG(duracion_minutos), 2) AS duracion_media\r\n    FROM dfFinal\r\n    WHERE passenger_count BETWEEN 1 AND 6\r\n    GROUP BY pasajeros\r\n    ORDER BY pasajeros\r\n  \"\"\")\r\n)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:11+0000",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "pasajeros": "string",
+                      "viajes": "string",
+                      "tarifa_media": "string",
+                      "propina_media": "string",
+                      "distancia_media": "string",
+                      "duracion_media": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "pasajeros\tviajes\ttarifa_media\tpropina_media\tdistancia_media\tduracion_media\n1\t2231648\t17.5\t3.41\t3.06\t14.75\n2\t389587\t19.87\t3.81\t3.64\t15.88\n3\t86800\t19.43\t3.57\t3.43\t15.72\n4\t53995\t21.38\t3.54\t3.68\t16.77\n5\t17327\t16.67\t3.38\t2.92\t19.18\n6\t11805\t17.13\t3.39\t3.04\t21.7\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=276",
+              "$$hashKey": "object:54557"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=277",
+              "$$hashKey": "object:54558"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777216374867_550861103",
+      "id": "paragraph_1777216374867_550861103",
+      "dateCreated": "2026-04-26T15:12:54+0000",
+      "dateStarted": "2026-04-26T16:04:11+0000",
+      "dateFinished": "2026-04-26T16:04:11+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48088"
+    },
+    {
+      "text": "%spark\r\n\r\n//  Recogidas vs destinos por distrito (porcentaje)\r\n\r\nz.show(\r\n  spark.sql(\"\"\"\r\n    SELECT\r\n      borough,\r\n      tipo,\r\n      viajes,\r\n      ROUND(viajes * 100.0 / SUM(viajes) OVER (PARTITION BY borough), 2) AS pct_del_distrito\r\n    FROM (\r\n      SELECT borough_recogida AS borough, 'Recogida' AS tipo, COUNT(*) AS viajes\r\n      FROM dfFinal WHERE borough_recogida IS NOT NULL\r\n      GROUP BY borough_recogida\r\n      UNION ALL\r\n      SELECT borough_destino AS borough, 'Destino' AS tipo, COUNT(*) AS viajes\r\n      FROM dfFinal WHERE borough_destino IS NOT NULL\r\n      GROUP BY borough_destino\r\n    )\r\n    ORDER BY borough\r\n  \"\"\")\r\n)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:11+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "borough": "string",
+                      "tipo": "string",
+                      "viajes": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "stacked": false
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "borough",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "tipo",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "pct_del_distrito",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "borough\ttipo\tviajes\tpct_del_distrito\nBronx\tRecogida\t5876\t28.00\nBronx\tDestino\t15110\t72.00\nBrooklyn\tRecogida\t23945\t18.46\nBrooklyn\tDestino\t105754\t81.54\nEWR\tRecogida\t61\t1.01\nEWR\tDestino\t5980\t98.99\nManhattan\tRecogida\t2523776\t49.78\nManhattan\tDestino\t2545905\t50.22\nQueens\tRecogida\t237443\t66.83\nQueens\tDestino\t117852\t33.17\nStaten Island\tRecogida\t68\t10.69\nStaten Island\tDestino\t568\t89.31\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=278",
+              "$$hashKey": "object:55266"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=279",
+              "$$hashKey": "object:55267"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=280",
+              "$$hashKey": "object:55268"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=281",
+              "$$hashKey": "object:55269"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777217061804_206622081",
+      "id": "paragraph_1777217061804_206622081",
+      "dateCreated": "2026-04-26T15:24:21+0000",
+      "dateStarted": "2026-04-26T16:04:11+0000",
+      "dateFinished": "2026-04-26T16:04:12+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48089"
+    },
+    {
+      "text": "%spark\r\n\r\n//  Recogidas vs destinos por distrito (diferencia)\r\n\r\nz.show(\r\n  spark.sql(\"\"\"\r\n    SELECT\r\n      borough,\r\n      SUM(CASE WHEN tipo = 'Recogida' THEN viajes ELSE 0 END) AS recogidas,\r\n      SUM(CASE WHEN tipo = 'Destino' THEN viajes ELSE 0 END) AS destinos,\r\n      SUM(CASE WHEN tipo = 'Recogida' THEN viajes ELSE 0 END) -\r\n      SUM(CASE WHEN tipo = 'Destino' THEN viajes ELSE 0 END) AS Diferencia\r\n    FROM (\r\n      SELECT borough_recogida AS borough, 'Recogida' AS tipo, COUNT(*) AS viajes\r\n      FROM dfFinal WHERE borough_recogida IS NOT NULL\r\n      GROUP BY borough_recogida\r\n      UNION ALL\r\n      SELECT borough_destino AS borough, 'Destino' AS tipo, COUNT(*) AS viajes\r\n      FROM dfFinal WHERE borough_destino IS NOT NULL\r\n      GROUP BY borough_destino\r\n    )\r\n    GROUP BY borough\r\n    ORDER BY diferencia DESC\r\n  \"\"\")\r\n)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:04:12+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "borough": "string",
+                      "recogidas": "string",
+                      "destinos": "string",
+                      "diferencia": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "stacked": false
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "borough",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "Diferencia",
+                  "index": 3,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "borough\trecogidas\tdestinos\tDiferencia\nQueens\t237443\t117852\t119591\nStaten Island\t68\t568\t-500\nEWR\t61\t5980\t-5919\nBronx\t5876\t15110\t-9234\nManhattan\t2523776\t2545905\t-22129\nBrooklyn\t23945\t105754\t-81809\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=282",
+              "$$hashKey": "object:55478"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=283",
+              "$$hashKey": "object:55479"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=284",
+              "$$hashKey": "object:55480"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=285",
+              "$$hashKey": "object:55481"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777216624965_1427735323",
+      "id": "paragraph_1777216624965_1427735323",
+      "dateCreated": "2026-04-26T15:17:04+0000",
+      "dateStarted": "2026-04-26T16:04:12+0000",
+      "dateFinished": "2026-04-26T16:04:13+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:48090"
+    }
+  ],
+  "name": "Análisis Taxis Nueva York",
+  "id": "2MQG3SN4K",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.11.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": false
+  },
+  "path": "/Análisis Taxis Nueva York"
+}

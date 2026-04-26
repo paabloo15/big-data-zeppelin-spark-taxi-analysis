@@ -1,0 +1,817 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%spark\r\nimport org.apache.spark.sql.functions._\r\n\r\nval df = spark.read\r\n  .parquet(\"/data/yellow_tripdata_2025-01.parquet\")\r\n\r\ndf.printSchema()\r\nprintln(s\"Total registros: ${df.count()}\")\r\ndf.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:32+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- VendorID: integer (nullable = true)\n |-- tpep_pickup_datetime: timestamp_ntz (nullable = true)\n |-- tpep_dropoff_datetime: timestamp_ntz (nullable = true)\n |-- passenger_count: long (nullable = true)\n |-- trip_distance: double (nullable = true)\n |-- RatecodeID: long (nullable = true)\n |-- store_and_fwd_flag: string (nullable = true)\n |-- PULocationID: integer (nullable = true)\n |-- DOLocationID: integer (nullable = true)\n |-- payment_type: long (nullable = true)\n |-- fare_amount: double (nullable = true)\n |-- extra: double (nullable = true)\n |-- mta_tax: double (nullable = true)\n |-- tip_amount: double (nullable = true)\n |-- tolls_amount: double (nullable = true)\n |-- improvement_surcharge: double (nullable = true)\n |-- total_amount: double (nullable = true)\n |-- congestion_surcharge: double (nullable = true)\n |-- Airport_fee: double (nullable = true)\n |-- cbd_congestion_fee: double (nullable = true)\n\nTotal registros: 3475226\n+--------+--------------------+---------------------+---------------+-------------+----------+------------------+------------+------------+------------+-----------+-----+-------+----------+------------+---------------------+------------+--------------------+-----------+------------------+\n|VendorID|tpep_pickup_datetime|tpep_dropoff_datetime|passenger_count|trip_distance|RatecodeID|store_and_fwd_flag|PULocationID|DOLocationID|payment_type|fare_amount|extra|mta_tax|tip_amount|tolls_amount|improvement_surcharge|total_amount|congestion_surcharge|Airport_fee|cbd_congestion_fee|\n+--------+--------------------+---------------------+---------------+-------------+----------+------------------+------------+------------+------------+-----------+-----+-------+----------+------------+---------------------+------------+--------------------+-----------+------------------+\n|       1| 2025-01-01 00:18:38|  2025-01-01 00:26:59|              1|          1.6|         1|                 N|         229|         237|           1|       10.0|  3.5|    0.5|       3.0|         0.0|                  1.0|        18.0|                 2.5|        0.0|               0.0|\n|       1| 2025-01-01 00:32:40|  2025-01-01 00:35:13|              1|          0.5|         1|                 N|         236|         237|           1|        5.1|  3.5|    0.5|      2.02|         0.0|                  1.0|       12.12|                 2.5|        0.0|               0.0|\n|       1| 2025-01-01 00:44:04|  2025-01-01 00:46:01|              1|          0.6|         1|                 N|         141|         141|           1|        5.1|  3.5|    0.5|       2.0|         0.0|                  1.0|        12.1|                 2.5|        0.0|               0.0|\n|       2| 2025-01-01 00:14:27|  2025-01-01 00:20:01|              3|         0.52|         1|                 N|         244|         244|           2|        7.2|  1.0|    0.5|       0.0|         0.0|                  1.0|         9.7|                 0.0|        0.0|               0.0|\n|       2| 2025-01-01 00:21:34|  2025-01-01 00:25:06|              3|         0.66|         1|                 N|         244|         116|           2|        5.8|  1.0|    0.5|       0.0|         0.0|                  1.0|         8.3|                 0.0|        0.0|               0.0|\n+--------+--------------------+---------------------+---------------+-------------+----------+------------------+------------+------------+------------+-----------+-----+-------+----------+------------+---------------------+------------+--------------------+-----------+------------------+\nonly showing top 5 rows\n\nimport org.apache.spark.sql.functions._\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [VendorID: int, tpep_pickup_datetime: timestamp_ntz ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=364",
+              "$$hashKey": "object:78056"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=365",
+              "$$hashKey": "object:78057"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=366",
+              "$$hashKey": "object:78058"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=367",
+              "$$hashKey": "object:78059"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777198673526_301354601",
+      "id": "paragraph_1777198673526_301354601",
+      "dateCreated": "2026-04-26T10:17:53+0000",
+      "dateStarted": "2026-04-26T16:40:33+0000",
+      "dateFinished": "2026-04-26T16:40:34+0000",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:76240"
+    },
+    {
+      "text": "%spark\r\n\r\nval dfClean = df\r\n  // Eliminar filas con nulos en columnas críticas\r\n  .filter(col(\"tpep_pickup_datetime\").isNotNull)\r\n  .filter(col(\"tpep_dropoff_datetime\").isNotNull)\r\n  .filter(col(\"trip_distance\").isNotNull)\r\n  .filter(col(\"fare_amount\").isNotNull)\r\n  .filter(col(\"total_amount\").isNotNull)\r\n  .filter(col(\"PULocationID\").isNotNull)\r\n  .filter(col(\"DOLocationID\").isNotNull)\r\n  .filter(col(\"PULocationID\").between(1, 263))\r\n  .filter(col(\"DOLocationID\").between(1, 263))\r\n\r\n  // Distancia debe ser positiva\r\n  .filter(col(\"trip_distance\") > 0)\r\n\r\n  // Debe haber mínimo un pasajero\r\n  .filter(col(\"passenger_count\") >= 1)\r\n    \r\n  // Tarifa debe ser positiva\r\n  .filter(col(\"fare_amount\") > 0)\r\n  .filter(col(\"total_amount\") > 0)\r\n\r\n  // Fechas dentro del rango esperado del dataset\r\n  .filter(year(col(\"tpep_pickup_datetime\")) === 2025)\r\n\r\n  // Dropoff debe ser posterior al pickup\r\n  .filter(col(\"tpep_dropoff_datetime\") > col(\"tpep_pickup_datetime\"))\r\n\r\ndfClean.cache()\r\n\r\nval totalRegistros = df.count()\r\nval descartados = totalRegistros - dfClean.count()\r\nprintln(f\"Registros originales:  $totalRegistros%7d\")\r\nprintln(f\"Registros limpios:     ${dfClean.count()}%7d\")\r\nprintln(f\"Registros descartados: $descartados%7d (${descartados * 100.0 / totalRegistros}%.2f%%)\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:34+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Registros originales:  3475226\nRegistros limpios:     2791169\nRegistros descartados:  684057 (19.68%)\n\u001b[1m\u001b[34mdfClean\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [VendorID: int, tpep_pickup_datetime: timestamp_ntz ... 18 more fields]\n\u001b[1m\u001b[34mtotalRegistros\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 3475226\n\u001b[1m\u001b[34mdescartados\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 684057\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=368",
+              "$$hashKey": "object:78182"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=369",
+              "$$hashKey": "object:78183"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=370",
+              "$$hashKey": "object:78184"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=371",
+              "$$hashKey": "object:78185"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=372",
+              "$$hashKey": "object:78186"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=373",
+              "$$hashKey": "object:78187"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777198693278_1776760101",
+      "id": "paragraph_1777198693278_1776760101",
+      "dateCreated": "2026-04-26T10:18:13+0000",
+      "dateStarted": "2026-04-26T16:40:35+0000",
+      "dateFinished": "2026-04-26T16:40:35+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76241"
+    },
+    {
+      "text": "%spark\r\nimport org.apache.spark.sql.functions._\r\n\r\n// Cargar zonas desde GeoJSON\r\nval zonasRaw = spark.read\r\n  .option(\"multiline\", \"true\")\r\n  .json(\"/data/nyc_taxi_zones.geojson\")\r\n\r\n// Explotar el array de features\r\nval zonas = zonasRaw\r\n  .select(explode(col(\"features\")).alias(\"feature\"))\r\n  .select(\r\n    col(\"feature.properties.LocationID\").cast(\"integer\").alias(\"LocationID\"),\r\n    col(\"feature.properties.zone\").alias(\"Zone\"),\r\n    col(\"feature.properties.borough\").alias(\"Borough\"),\r\n    col(\"feature.properties.service_zone\").alias(\"service_zone\")\r\n  )\r\n\r\n// Zonas de recogida\r\nval zonasRecogida = zonas\r\n  .withColumnRenamed(\"LocationID\", \"pu_id\")\r\n  .withColumnRenamed(\"Zone\", \"zona_recogida\")\r\n  .withColumnRenamed(\"Borough\", \"borough_recogida\")\r\n  .withColumnRenamed(\"service_zone\", \"service_zone_recogida\")\r\n\r\n// Zonas de destino\r\nval zonasDestino = zonas\r\n  .withColumnRenamed(\"LocationID\", \"do_id\")\r\n  .withColumnRenamed(\"Zone\", \"zona_destino\")\r\n  .withColumnRenamed(\"Borough\", \"borough_destino\")\r\n  .withColumnRenamed(\"service_zone\", \"service_zone_destino\")\r\n\r\n// Join por ID numérico\r\nval dfConZonas = dfClean\r\n  .join(zonasRecogida, df(\"PULocationID\") === col(\"pu_id\"), \"left\")\r\n  .drop(\"pu_id\")\r\n  .join(zonasDestino, df(\"DOLocationID\") === col(\"do_id\"), \"left\")\r\n  .drop(\"do_id\")\r\n\r\n// Traducir códigos a texto y añadir duración\r\nval dfFinal = dfConZonas\r\n  .withColumn(\"vendor\",\r\n    when(col(\"VendorID\") === 1, \"Creative Mobile Technologies\")\r\n    .when(col(\"VendorID\") === 2, \"VeriFone Inc\")\r\n    .otherwise(\"Desconocido\")\r\n  )\r\n  .withColumn(\"tipo_pago\",\r\n    when(col(\"payment_type\") === 1, \"Tarjeta\")\r\n    .when(col(\"payment_type\") === 2, \"Efectivo\")\r\n    .when(col(\"payment_type\") === 3, \"Sin cargo\")\r\n    .when(col(\"payment_type\") === 4, \"Disputa\")\r\n    .when(col(\"payment_type\") === 5, \"Desconocido\")\r\n    .when(col(\"payment_type\") === 6, \"Viaje anulado\")\r\n    .otherwise(\"Otro\")\r\n  )\r\n  .withColumn(\"tarifa_tipo\",\r\n    when(col(\"RatecodeID\") === 1, \"Estándar\")\r\n    .when(col(\"RatecodeID\") === 2, \"JFK\")\r\n    .when(col(\"RatecodeID\") === 3, \"Newark\")\r\n    .when(col(\"RatecodeID\") === 4, \"Nassau/Westchester\")\r\n    .when(col(\"RatecodeID\") === 5, \"Tarifa negociada\")\r\n    .when(col(\"RatecodeID\") === 6, \"Viaje en grupo\")\r\n    .otherwise(\"Desconocido\")\r\n  )\r\n  .withColumn(\"store_and_fwd\",\r\n    when(col(\"store_and_fwd_flag\") === \"Y\", \"Sí\")\r\n    .when(col(\"store_and_fwd_flag\") === \"N\", \"No\")\r\n    .otherwise(\"Desconocido\")\r\n  )\r\n  .withColumn(\"duracion_minutos\",\r\n    round((unix_timestamp(col(\"tpep_dropoff_datetime\")) -\r\n           unix_timestamp(col(\"tpep_pickup_datetime\"))) / 60, 2)\r\n  )\r\n  .drop(\"VendorID\", \"payment_type\", \"RatecodeID\", \"store_and_fwd_flag\")\r\n\r\ndfFinal.cache()\r\nprintln(s\"Total registros: ${dfFinal.count()}\")\r\ndfFinal.createOrReplaceTempView(\"dfFinal\")\r\ndfFinal.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:35+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Total registros: 2791169\nroot\n |-- tpep_pickup_datetime: timestamp_ntz (nullable = true)\n |-- tpep_dropoff_datetime: timestamp_ntz (nullable = true)\n |-- passenger_count: long (nullable = true)\n |-- trip_distance: double (nullable = true)\n |-- PULocationID: integer (nullable = true)\n |-- DOLocationID: integer (nullable = true)\n |-- fare_amount: double (nullable = true)\n |-- extra: double (nullable = true)\n |-- mta_tax: double (nullable = true)\n |-- tip_amount: double (nullable = true)\n |-- tolls_amount: double (nullable = true)\n |-- improvement_surcharge: double (nullable = true)\n |-- total_amount: double (nullable = true)\n |-- congestion_surcharge: double (nullable = true)\n |-- Airport_fee: double (nullable = true)\n |-- cbd_congestion_fee: double (nullable = true)\n |-- zona_recogida: string (nullable = true)\n |-- borough_recogida: string (nullable = true)\n |-- service_zone_recogida: string (nullable = true)\n |-- zona_destino: string (nullable = true)\n |-- borough_destino: string (nullable = true)\n |-- service_zone_destino: string (nullable = true)\n |-- vendor: string (nullable = false)\n |-- tipo_pago: string (nullable = false)\n |-- tarifa_tipo: string (nullable = false)\n |-- store_and_fwd: string (nullable = false)\n |-- duracion_minutos: double (nullable = true)\n\nimport org.apache.spark.sql.functions._\n\u001b[1m\u001b[34mzonasRaw\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [crs: struct<properties: struct<name: string>, type: string>, features: array<struct<geometry:struct<coordinates:array<array<array<string>>>,type:string>,properties:struct<LocationID:bigint,OBJECTID:bigint,Shape_Area:double,Shape_Leng:double,borough:string,service_zone:string,zone:string>,type:string>> ... 2 more fields]\n\u001b[1m\u001b[34mzonas\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [LocationID: int, Zone: string ... 2 more fields]\n\u001b[1m\u001b[34mzonasRecogida\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [pu_id: int, zona_recogida: string ... 2 more fields]\n\u001b[1m\u001b[34mzonasDestino\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [do_id: int, zona_destino: string ... 2 more fie...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=374",
+              "$$hashKey": "object:78264"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=375",
+              "$$hashKey": "object:78265"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=376",
+              "$$hashKey": "object:78266"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777199032854_854991993",
+      "id": "paragraph_1777199032854_854991993",
+      "dateCreated": "2026-04-26T10:23:52+0000",
+      "dateStarted": "2026-04-26T16:40:36+0000",
+      "dateFinished": "2026-04-26T16:40:37+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76242"
+    },
+    {
+      "text": "%spark\r\nimport java.io.PrintWriter\r\n\r\n// 1. Viajes por zona\r\nval viajesZona = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, COUNT(*) as viajes\r\n  FROM dfFinal GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w1 = new PrintWriter(\"/data/viajes_por_zona.csv\")\r\nw1.println(\"location_id,viajes\")\r\nviajesZona.foreach(r => w1.println(s\"${r(0)},${r(1)}\"))\r\nw1.close()\r\n\r\n// 2. Tarifa media por zona\r\nval tarifaZona = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, ROUND(AVG(fare_amount),2) as tarifa_media\r\n  FROM dfFinal GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w2 = new PrintWriter(\"/data/tarifa_por_zona.csv\")\r\nw2.println(\"location_id,tarifa_media\")\r\ntarifaZona.foreach(r => w2.println(s\"${r(0)},${r(1)}\"))\r\nw2.close()\r\n\r\n// 3. Propina media por zona\r\nval propinaZona = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, ROUND(AVG(tip_amount),2) as propina_media\r\n  FROM dfFinal WHERE tipo_pago = 'Tarjeta' GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w3 = new PrintWriter(\"/data/propina_por_zona.csv\")\r\nw3.println(\"location_id,propina_media\")\r\npropinaZona.foreach(r => w3.println(s\"${r(0)},${r(1)}\"))\r\nw3.close()\r\n\r\n// 4. Distancia media por zona\r\nval distanciaZona = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, ROUND(AVG(trip_distance),2) as distancia_media\r\n  FROM dfFinal GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w4 = new PrintWriter(\"/data/distancia_por_zona.csv\")\r\nw4.println(\"location_id,distancia_media\")\r\ndistanciaZona.foreach(r => w4.println(s\"${r(0)},${r(1)}\"))\r\nw4.close()\r\n\r\n// 5. Duración media por zona\r\nval duracionZona = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, ROUND(AVG(duracion_minutos),2) as duracion_media\r\n  FROM dfFinal GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w5 = new PrintWriter(\"/data/duracion_por_zona.csv\")\r\nw5.println(\"location_id,duracion_media\")\r\nduracionZona.foreach(r => w5.println(s\"${r(0)},${r(1)}\"))\r\nw5.close()\r\n\r\n// 6. Viajes hora pico (8-9h)\r\nval viajesHoraPico = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, COUNT(*) as viajes\r\n  FROM dfFinal WHERE HOUR(tpep_pickup_datetime) BETWEEN 8 AND 9\r\n  GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w6 = new PrintWriter(\"/data/viajes_hora_pico.csv\")\r\nw6.println(\"location_id,viajes\")\r\nviajesHoraPico.foreach(r => w6.println(s\"${r(0)},${r(1)}\"))\r\nw6.close()\r\n\r\n// 7. Viajes hora valle (3-4h)\r\nval viajesHoraValle = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, COUNT(*) as viajes\r\n  FROM dfFinal WHERE HOUR(tpep_pickup_datetime) BETWEEN 3 AND 4\r\n  GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w7 = new PrintWriter(\"/data/viajes_hora_valle.csv\")\r\nw7.println(\"location_id,viajes\")\r\nviajesHoraValle.foreach(r => w7.println(s\"${r(0)},${r(1)}\"))\r\nw7.close()\r\n\r\n// 8. Ingresos totales por zona\r\nval ingresosZona = spark.sql(\"\"\"\r\n  SELECT PULocationID as location_id, ROUND(SUM(total_amount),2) as ingresos_totales\r\n  FROM dfFinal GROUP BY PULocationID\r\n\"\"\").collect()\r\nval w8 = new PrintWriter(\"/data/ingresos_por_zona.csv\")\r\nw8.println(\"location_id,ingresos_totales\")\r\ningresosZona.foreach(r => w8.println(s\"${r(0)},${r(1)}\"))\r\nw8.close()\r\n\r\nprintln(\"Todos los CSVs exportados\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:37+0000",
+      "progress": 50,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Todos los CSVs exportados\nimport java.io.PrintWriter\n\u001b[1m\u001b[34mviajesZona\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.sql.Row]\u001b[0m = Array([148,25499], [243,338], [31,8], [137,29987], [85,261], [65,1137], [255,556], [53,75], [133,166], [78,172], [155,293], [108,151], [211,21349], [34,33], [193,300], [126,79], [101,39], [115,3], [81,110], [28,242], [210,269], [183,58], [76,1235], [26,274], [27,1], [159,261], [192,42], [253,2], [236,137372], [12,752], [223,466], [91,614], [222,377], [209,3809], [22,176], [128,13], [230,107000], [122,55], [232,2350], [233,28748], [93,429], [225,619], [157,292], [190,23], [246,50103], [224,2628], [47,176], [140,63125], [177,445], [132,128043], [152,1203], [185,83], [146,889], [259,119], [1,61], [52,341], [212,96], [182,222], [13,15367], [218,266], [16,39], [86,231], [6,51], [168,323], [205,...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=377",
+              "$$hashKey": "object:78913"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=378",
+              "$$hashKey": "object:78914"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=379",
+              "$$hashKey": "object:78915"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=380",
+              "$$hashKey": "object:78916"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=381",
+              "$$hashKey": "object:78917"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=382",
+              "$$hashKey": "object:78918"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=383",
+              "$$hashKey": "object:78919"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=384",
+              "$$hashKey": "object:78920"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=385",
+              "$$hashKey": "object:78921"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=386",
+              "$$hashKey": "object:78922"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=387",
+              "$$hashKey": "object:78923"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=388",
+              "$$hashKey": "object:78924"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=389",
+              "$$hashKey": "object:78925"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=390",
+              "$$hashKey": "object:78926"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=391",
+              "$$hashKey": "object:78927"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201235348_1551263981",
+      "id": "paragraph_1777201235348_1551263981",
+      "dateCreated": "2026-04-26T11:00:35+0000",
+      "dateStarted": "2026-04-26T16:40:38+0000",
+      "dateFinished": "2026-04-26T16:40:41+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76243"
+    },
+    {
+      "text": "%python\r\nimport folium\r\nimport json\r\nimport pandas as pd\r\n\r\nwith open('/data/nyc_taxi_zones.geojson') as f:\r\n    geojson = json.load(f)\r\n\r\ndef hacer_mapa(csv_file, columna, color, titulo):\r\n    df = pd.read_csv(f'/data/{csv_file}')\r\n    df['location_id'] = df['location_id'].astype(int)\r\n    \r\n    m = folium.Map(location=[40.7128, -74.0060], zoom_start=11)\r\n    folium.Choropleth(\r\n        geo_data=geojson,\r\n        data=df,\r\n        columns=[\"location_id\", columna],\r\n        key_on=\"feature.properties.LocationID\",\r\n        fill_color=color,\r\n        fill_opacity=0.7,\r\n        line_opacity=0.2,\r\n        legend_name=titulo\r\n    ).add_to(m)\r\n    return m\r\n\r\nprint(\"Función lista\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:41+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Función lista\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201403152_1720796674",
+      "id": "paragraph_1777201403152_1720796674",
+      "dateCreated": "2026-04-26T11:03:23+0000",
+      "dateStarted": "2026-04-26T16:40:42+0000",
+      "dateFinished": "2026-04-26T16:40:42+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76244"
+    },
+    {
+      "text": "%python\r\nm = hacer_mapa(\"viajes_por_zona.csv\", \"viajes\", \"YlOrRd\", \"Viajes por zona\")\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:42+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201443950_157863138",
+      "id": "paragraph_1777201443950_157863138",
+      "dateCreated": "2026-04-26T11:04:03+0000",
+      "dateStarted": "2026-04-26T16:40:44+0000",
+      "dateFinished": "2026-04-26T16:40:46+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76245"
+    },
+    {
+      "text": "%python\r\nm = hacer_mapa(\"tarifa_por_zona.csv\", \"tarifa_media\", \"Blues\", \"Tarifa media ($)\")\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:46+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201455379_361621234",
+      "id": "paragraph_1777201455379_361621234",
+      "dateCreated": "2026-04-26T11:04:15+0000",
+      "dateStarted": "2026-04-26T16:40:47+0000",
+      "dateFinished": "2026-04-26T16:40:49+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76246"
+    },
+    {
+      "text": "%python\r\nm = hacer_mapa(\"propina_por_zona.csv\", \"propina_media\", \"Greens\", \"Propina media ($)\")\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:49+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201468188_1279500024",
+      "id": "paragraph_1777201468188_1279500024",
+      "dateCreated": "2026-04-26T11:04:28+0000",
+      "dateStarted": "2026-04-26T16:40:50+0000",
+      "dateFinished": "2026-04-26T16:40:51+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76247"
+    },
+    {
+      "text": "%python\r\nm = hacer_mapa(\"distancia_por_zona.csv\", \"distancia_media\", \"Oranges\", \"Distancia media (millas)\")\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:51+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201487098_1404133975",
+      "id": "paragraph_1777201487098_1404133975",
+      "dateCreated": "2026-04-26T11:04:47+0000",
+      "dateStarted": "2026-04-26T16:40:53+0000",
+      "dateFinished": "2026-04-26T16:40:54+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76248"
+    },
+    {
+      "text": "%python\r\nm = hacer_mapa(\"duracion_por_zona.csv\", \"duracion_media\", \"Purples\", \"Duración media (minutos)\")\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:54+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201514916_678894043",
+      "id": "paragraph_1777201514916_678894043",
+      "dateCreated": "2026-04-26T11:05:14+0000",
+      "dateStarted": "2026-04-26T16:40:55+0000",
+      "dateFinished": "2026-04-26T16:40:57+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76249"
+    },
+    {
+      "text": "%python\r\nm_pico = hacer_mapa(\"viajes_hora_pico.csv\", \"viajes\", \"YlOrRd\", \"Viajes hora pico (8-9h)\")\r\nm_valle = hacer_mapa(\"viajes_hora_valle.csv\", \"viajes\", \"YlGnBu\", \"Viajes hora valle (3-4h)\")\r\n\r\nprint(\"%html <h3>Hora pico (8-9h)</h3>\" + m_pico._repr_html_())\r\nprint(\"%html <h3>Hora valle (3-4h)</h3>\" + m_valle._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:40:57+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201538773_243151326",
+      "id": "paragraph_1777201538773_243151326",
+      "dateCreated": "2026-04-26T11:05:38+0000",
+      "dateStarted": "2026-04-26T16:40:58+0000",
+      "dateFinished": "2026-04-26T16:41:01+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76250"
+    },
+    {
+      "text": "%python\r\nm = hacer_mapa(\"ingresos_por_zona.csv\", \"ingresos_totales\", \"RdPu\", \"Ingresos totales ($)\")\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:41:01+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201562116_573807289",
+      "id": "paragraph_1777201562116_573807289",
+      "dateCreated": "2026-04-26T11:06:02+0000",
+      "dateStarted": "2026-04-26T16:41:02+0000",
+      "dateFinished": "2026-04-26T16:41:04+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76251"
+    },
+    {
+      "text": "%python\r\nimport folium\r\nfrom branca.colormap import LinearColormap\r\nimport json\r\nimport pandas as pd\r\n\r\n# Cargar todos los datos\r\nviajes = pd.read_csv('/data/viajes_por_zona.csv')\r\ntarifas = pd.read_csv('/data/tarifa_por_zona.csv').set_index('location_id')\r\npropinas = pd.read_csv('/data/propina_por_zona.csv').set_index('location_id')\r\ndistancias = pd.read_csv('/data/distancia_por_zona.csv').set_index('location_id')\r\nduraciones = pd.read_csv('/data/duracion_por_zona.csv').set_index('location_id')\r\ningresos = pd.read_csv('/data/ingresos_por_zona.csv').set_index('location_id')\r\n\r\nviajes['location_id'] = viajes['location_id'].astype(int)\r\nviajes_idx = viajes.set_index('location_id')\r\n\r\nwith open('/data/nyc_taxi_zones.geojson') as f:\r\n    geojson = json.load(f)\r\n\r\ncolormap = LinearColormap(\r\n    colors=['#e8f4f8', '#313695', '#74add1', '#ffffbf', '#f46d43', '#a50026'],\r\n    vmin=viajes['viajes'].min(),\r\n    vmax=viajes['viajes'].max(),\r\n    caption='Viajes por zona de recogida'\r\n)\r\ndef fmt_num(val):\r\n    try: return f\"{int(val):,}\"\r\n    except: return 'N/A'\r\n\r\ndef fmt_dec(val):\r\n    try: return f\"{float(val):.2f}\"\r\n    except: return 'N/A'\r\n\r\nm = folium.Map(location=[40.7128, -74.0060], zoom_start=11)\r\n\r\nfolium.GeoJson(\r\n    geojson,\r\n    style_function=lambda feature: {\r\n        'fillColor': colormap(viajes_idx['viajes'].get(feature['properties']['LocationID'], 0)),\r\n        'color': 'black',\r\n        'weight': 0.5,\r\n        'fillOpacity': 0.7\r\n    },\r\n    tooltip=folium.GeoJsonTooltip(\r\n        fields=['zone', 'borough'],\r\n        aliases=['Zona', 'Distrito'],\r\n        localize=True\r\n    )\r\n).add_to(m)\r\n\r\n# Tooltip detallado por zona\r\nfor feature in geojson[\"features\"]:\r\n    loc_id = feature[\"properties\"][\"LocationID\"]\r\n    zona = feature[\"properties\"][\"zone\"]\r\n    borough = feature[\"properties\"][\"borough\"]\r\n\r\n    v = viajes_idx.loc[loc_id, 'viajes'] if loc_id in viajes_idx.index else 'N/A'\r\n    t = tarifas.loc[loc_id, 'tarifa_media'] if loc_id in tarifas.index else 'N/A'\r\n    p = propinas.loc[loc_id, 'propina_media'] if loc_id in propinas.index else 'N/A'\r\n    d = distancias.loc[loc_id, 'distancia_media'] if loc_id in distancias.index else 'N/A'\r\n    dur = duraciones.loc[loc_id, 'duracion_media'] if loc_id in duraciones.index else 'N/A'\r\n    i = ingresos.loc[loc_id, 'ingresos_totales'] if loc_id in ingresos.index else 'N/A'\r\n\r\n    folium.GeoJson(\r\n        feature,\r\n        style_function=lambda x: {\"fillOpacity\": 0, \"weight\": 0},\r\n        tooltip=folium.Tooltip(f\"\"\"\r\n            <b>{zona}</b> — {borough}<br>\r\n            🚕 Viajes: {fmt_num(v)}<br>\r\n            💰 Tarifa media: ${fmt_dec(t)}<br>\r\n            💵 Propina media: ${fmt_dec(p)}<br>\r\n            📍 Distancia media: {fmt_dec(d)} millas<br>\r\n            ⏱ Duración media: {fmt_dec(dur)} min<br>\r\n            💼 Ingresos totales: ${fmt_num(i)}\r\n        \"\"\")\r\n    ).add_to(m)\r\n\r\ncolormap.add_to(m)\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:41:04+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777201614854_1809558502",
+      "id": "paragraph_1777201614854_1809558502",
+      "dateCreated": "2026-04-26T11:06:54+0000",
+      "dateStarted": "2026-04-26T16:41:05+0000",
+      "dateFinished": "2026-04-26T16:41:08+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76252"
+    },
+    {
+      "text": "%spark\r\nimport java.io.PrintWriter\r\n\r\nval viajesD = spark.sql(\"SELECT DOLocationID as location_id, COUNT(*) as viajes FROM dfFinal GROUP BY DOLocationID\").collect()\r\nval w1 = new PrintWriter(\"/data/viajes_por_destino.csv\")\r\nw1.println(\"location_id,viajes\")\r\nviajesD.foreach(r => w1.println(s\"${r(0)},${r(1)}\"))\r\nw1.close()\r\n\r\nval tarifaD = spark.sql(\"SELECT DOLocationID as location_id, ROUND(AVG(fare_amount),2) as tarifa_media FROM dfFinal GROUP BY DOLocationID\").collect()\r\nval w2 = new PrintWriter(\"/data/tarifa_por_destino.csv\")\r\nw2.println(\"location_id,tarifa_media\")\r\ntarifaD.foreach(r => w2.println(s\"${r(0)},${r(1)}\"))\r\nw2.close()\r\n\r\nval propinaD = spark.sql(\"SELECT DOLocationID as location_id, ROUND(AVG(tip_amount),2) as propina_media FROM dfFinal WHERE tipo_pago = 'Tarjeta' GROUP BY DOLocationID\").collect()\r\nval w3 = new PrintWriter(\"/data/propina_por_destino.csv\")\r\nw3.println(\"location_id,propina_media\")\r\npropinaD.foreach(r => w3.println(s\"${r(0)},${r(1)}\"))\r\nw3.close()\r\n\r\nval distanciaD = spark.sql(\"SELECT DOLocationID as location_id, ROUND(AVG(trip_distance),2) as distancia_media FROM dfFinal GROUP BY DOLocationID\").collect()\r\nval w4 = new PrintWriter(\"/data/distancia_por_destino.csv\")\r\nw4.println(\"location_id,distancia_media\")\r\ndistanciaD.foreach(r => w4.println(s\"${r(0)},${r(1)}\"))\r\nw4.close()\r\n\r\nval duracionD = spark.sql(\"SELECT DOLocationID as location_id, ROUND(AVG(duracion_minutos),2) as duracion_media FROM dfFinal GROUP BY DOLocationID\").collect()\r\nval w5 = new PrintWriter(\"/data/duracion_por_destino.csv\")\r\nw5.println(\"location_id,duracion_media\")\r\nduracionD.foreach(r => w5.println(s\"${r(0)},${r(1)}\"))\r\nw5.close()\r\n\r\nval ingresosD = spark.sql(\"SELECT DOLocationID as location_id, ROUND(SUM(total_amount),2) as ingresos_totales FROM dfFinal GROUP BY DOLocationID\").collect()\r\nval w6 = new PrintWriter(\"/data/ingresos_por_destino.csv\")\r\nw6.println(\"location_id,ingresos_totales\")\r\ningresosD.foreach(r => w6.println(s\"${r(0)},${r(1)}\"))\r\nw6.close()\r\n\r\nprintln(\"CSVs de destino exportados\")",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:41:08+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "CSVs de destino exportados\nimport java.io.PrintWriter\n\u001b[1m\u001b[34mviajesD\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.sql.Row]\u001b[0m = Array([148,25661], [243,4188], [31,67], [137,36510], [85,569], [251,30], [65,3560], [255,6069], [53,289], [133,717], [78,311], [155,811], [108,240], [211,23052], [193,793], [34,219], [115,44], [126,267], [101,187], [81,182], [28,940], [210,494], [183,110], [76,1919], [26,872], [27,43], [159,554], [192,203], [44,10], [253,23], [236,144305], [12,1115], [223,2864], [91,976], [222,459], [209,6467], [22,463], [128,164], [122,196], [230,88963], [233,41281], [232,11434], [225,2273], [93,1507], [157,1020], [190,262], [246,54332], [224,11287], [111,11], [47,240], [140,63002], [177,825], [152,3017], [132,23989], [185,301], [146,1677], [259,264], [1,5980], [206,45], [52,1903], [212,226], [182,408], [13,...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=393",
+              "$$hashKey": "object:79477"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=394",
+              "$$hashKey": "object:79478"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=395",
+              "$$hashKey": "object:79479"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=396",
+              "$$hashKey": "object:79480"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=397",
+              "$$hashKey": "object:79481"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=398",
+              "$$hashKey": "object:79482"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=399",
+              "$$hashKey": "object:79483"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=400",
+              "$$hashKey": "object:79484"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=401",
+              "$$hashKey": "object:79485"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=402",
+              "$$hashKey": "object:79486"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=403",
+              "$$hashKey": "object:79487"
+            },
+            {
+              "jobUrl": "http://b24687c06901:4040/jobs/job?id=404",
+              "$$hashKey": "object:79488"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777202179501_824118561",
+      "id": "paragraph_1777202179501_824118561",
+      "dateCreated": "2026-04-26T11:16:19+0000",
+      "dateStarted": "2026-04-26T16:41:10+0000",
+      "dateFinished": "2026-04-26T16:41:12+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76253"
+    },
+    {
+      "text": "%python\r\nimport folium\r\nfrom branca.colormap import LinearColormap\r\nimport json\r\nimport pandas as pd\r\n\r\nviajes = pd.read_csv('/data/viajes_por_destino.csv')\r\ntarifas = pd.read_csv('/data/tarifa_por_destino.csv').set_index('location_id')\r\npropinas = pd.read_csv('/data/propina_por_destino.csv').set_index('location_id')\r\ndistancias = pd.read_csv('/data/distancia_por_destino.csv').set_index('location_id')\r\nduraciones = pd.read_csv('/data/duracion_por_destino.csv').set_index('location_id')\r\ningresos = pd.read_csv('/data/ingresos_por_destino.csv').set_index('location_id')\r\n\r\nviajes['location_id'] = viajes['location_id'].astype(int)\r\nviajes_idx = viajes.set_index('location_id')\r\n\r\nwith open('/data/nyc_taxi_zones.geojson') as f:\r\n    geojson = json.load(f)\r\n\r\ncolormap = LinearColormap(\r\n    colors=['#e8f4f8', '#313695', '#74add1', '#ffffbf', '#f46d43', '#a50026'],\r\n    vmin=viajes['viajes'].min(),\r\n    vmax=viajes['viajes'].max(),\r\n    caption='Viajes por zona de destino'\r\n)\r\ndef fmt_num(val):\r\n    try: return f\"{int(val):,}\"\r\n    except: return 'N/A'\r\n\r\ndef fmt_dec(val):\r\n    try: return f\"{float(val):.2f}\"\r\n    except: return 'N/A'\r\n\r\nm = folium.Map(location=[40.7128, -74.0060], zoom_start=11)\r\n\r\nfolium.GeoJson(\r\n    geojson,\r\n    style_function=lambda feature: {\r\n        'fillColor': colormap(viajes_idx['viajes'].get(feature['properties']['LocationID'], 0)),\r\n        'color': 'black',\r\n        'weight': 0.5,\r\n        'fillOpacity': 0.7\r\n    },\r\n    tooltip=folium.GeoJsonTooltip(\r\n        fields=['zone', 'borough'],\r\n        aliases=['Zona', 'Distrito'],\r\n        localize=True\r\n    )\r\n).add_to(m)\r\n\r\n# Tooltip detallado por zona\r\nfor feature in geojson[\"features\"]:\r\n    loc_id = feature[\"properties\"][\"LocationID\"]\r\n    zona = feature[\"properties\"][\"zone\"]\r\n    borough = feature[\"properties\"][\"borough\"]\r\n\r\n    v = viajes_idx.loc[loc_id, 'viajes'] if loc_id in viajes_idx.index else 'N/A'\r\n    t = tarifas.loc[loc_id, 'tarifa_media'] if loc_id in tarifas.index else 'N/A'\r\n    p = propinas.loc[loc_id, 'propina_media'] if loc_id in propinas.index else 'N/A'\r\n    d = distancias.loc[loc_id, 'distancia_media'] if loc_id in distancias.index else 'N/A'\r\n    dur = duraciones.loc[loc_id, 'duracion_media'] if loc_id in duraciones.index else 'N/A'\r\n    i = ingresos.loc[loc_id, 'ingresos_totales'] if loc_id in ingresos.index else 'N/A'\r\n\r\n    folium.GeoJson(\r\n        feature,\r\n        style_function=lambda x: {\"fillOpacity\": 0, \"weight\": 0},\r\n        tooltip=folium.Tooltip(f\"\"\"\r\n            <b>{zona}</b> — {borough}<br>\r\n            🏁 Destinos: {fmt_num(v)}<br>\r\n            💰 Tarifa media: ${fmt_dec(t)}<br>\r\n            💵 Propina media: ${fmt_dec(p)}<br>\r\n            📍 Distancia media: {fmt_dec(d)} millas<br>\r\n            ⏱ Duración media: {fmt_dec(dur)} min<br>\r\n            💼 Ingresos totales: ${fmt_num(i)}\r\n        \"\"\")\r\n    ).add_to(m)\r\n\r\ncolormap.add_to(m)\r\nprint(\"%html \" + m._repr_html_())",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:41:12+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777202386994_621826670",
+      "id": "paragraph_1777202386994_621826670",
+      "dateCreated": "2026-04-26T11:19:46+0000",
+      "dateStarted": "2026-04-26T16:41:12+0000",
+      "dateFinished": "2026-04-26T16:41:16+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76254"
+    },
+    {
+      "text": "%python\n",
+      "user": "anonymous",
+      "dateUpdated": "2026-04-26T16:41:16+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/python",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1777202404666_1838205310",
+      "id": "paragraph_1777202404666_1838205310",
+      "dateCreated": "2026-04-26T11:20:04+0000",
+      "dateStarted": "2026-04-26T16:41:17+0000",
+      "dateFinished": "2026-04-26T16:41:17+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:76255"
+    }
+  ],
+  "name": "Análisis Taxis Nueva York Mapas",
+  "id": "2MT32YVNF",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.11.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {
+    "isRunning": false
+  },
+  "path": "/Análisis Taxis Nueva York Mapas"
+}
